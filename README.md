@@ -7,7 +7,7 @@ Viana e Moura construções mas também utilizar relatórios como base para toma
 <details>
   <summary>✅ Inicialização do projeto</summary>
   <hr/>
-  Para facilitar a inicialização desse projeto, foi feito um docker-compose que roda toda a aplicação por um comando no terminal, para rodar o comando, é necessário que possua do <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">Docker</a> em sua máquina
+  Para facilitar a inicialização desse projeto, foi feito um docker-compose que roda toda a aplicação por um comando no terminal, para rodar o comando, é necessário que possua o <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">Docker</a> em sua máquina
 </details>
 
 <details>

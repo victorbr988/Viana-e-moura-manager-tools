@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Tools {
+  id         Int     @id @default(autoincrement())
+  name       String  @unique
+  entrance   Entrance[]
+  exit       Exit[]
+}
+
+model Supervisors {
+  id          Int     @id @default(autoincrement())
+  name        String  @unique
+  sector      String
+  entrance    Entrance[]
+}
+
+model Enterprises {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  exit  Exit[]
+}
+
+model Entrance {
+  id              Int           @id @default(autoincrement())
+  name            Tools        @relation(fields: [toolName], references: [name], onDelete: Cascade)
+  toolName        String
+  addedAt         DateTime
+  supervisors     Supervisors?  @relation(fields: [supervisorName], references: [name], onDelete: Cascade)
+  supervisorName  String
+  quantity        Int
+  unitPrice       Float
+}
+
+model Exit {
+  id              Int           @id @default(autoincrement())
+  status          String
+  requester       String
+  name            Tools?        @relation(fields: [toolName], references: [name], onDelete: Cascade)
+  toolName        String
+  requestedAt       DateTime
+  responseAt      DateTime
+  enterprise      Enterprises?  @relation(fields: [enterpriseName], references: [name], onDelete: Cascade)
+  enterpriseName  String
+  quantity        Int
+  account         String
+  subAccount      String
+}

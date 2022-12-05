@@ -6,8 +6,8 @@ COPY package* ./
 
 RUN npm install
 
-COPY . .
+COPY ./src ./
 
-RUN npm run dev
+RUN npm run build
 
-# RUN npm run build
+CMD ["npm", "start"]

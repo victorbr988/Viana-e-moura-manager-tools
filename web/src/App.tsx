@@ -2,7 +2,6 @@ import { FiSettings } from "react-icons/fi"
 import { CardNavigate } from "./components/CardNavigation"
 
 function App() {
-  const color = `#121212`
   return (
     <div className="App">
       <CardNavigate.Root route="/">
@@ -11,7 +10,7 @@ function App() {
           <FiSettings />
         </CardNavigate.WithIcon>
       </CardNavigate.Root>
-      <div className={`w-32 h-32 bg-[${color}]`}>
+      <div className={`w-32 h-32`}>
 
       </div>
     </div>

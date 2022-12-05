@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npx tsc",
+    "start": "npm run build && node ./dist/src/service.js",
     "test": "vitest",
     "view:db": "npx prisma studio",
     "dev": "nodemon ./src/service.ts"

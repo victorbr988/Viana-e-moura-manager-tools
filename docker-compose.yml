@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+  frontend:
+    container_name: app_frontend
+    build: ./web
+    working_dir: /app-frontend
+    ports: 
+      - 5173:3000
+    volumes:
+      - ./:/app-frontend
+    depends_on:
+      - backend
+  backend:
+    build: ./server
+    container_name: api_backend
+    ports: 
+      - 3001:3001
+    platform: linux/x86_64
+    working_dir: /app-backend
+    environment:
+      - PORT=3001
+      - DB_USER=root
+      - DB_PASS=123456
+      - DB_HOST=database
+      - DB_PORT=3306
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "lsoft", "-t", "-i:3001"]
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./:/app_backend
+  database:
+    image: mysql:8.0.21
+    container_name: database
+    platform: linux/x86_64
+    ports:
+      - 3002:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5

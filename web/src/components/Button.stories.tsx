@@ -10,7 +10,7 @@ export default {
   component: ButtonAdd,
   args: {
     children: (
-      <Text asChild={false} text="Novo" color='white' />
+      <Text size='sm' text="Novo" color='white' />
     ),
   },
   argTypes: {
@@ -29,7 +29,7 @@ export const ButtonWithImage: StoryObj<ButtonRootProps> = {
     children: (
       <Fragment>
         <img className='w-6 h-6' src={reactImage} alt="react-image" />
-        <Text asChild={false} text="Novo" color='white' />
+        <Text size='sm' text="Novo" color='white' />
       </Fragment>
     )
   }
@@ -40,7 +40,7 @@ export const ButtonWithIcon: StoryObj<ButtonRootProps> = {
     children: (
       <Fragment>
         <FiPlus />
-        <Text asChild={false} text='Novo' color='white' />
+        <Text size='sm' text='Novo' color='white' />
       </Fragment>
     )
   }

@@ -6,8 +6,18 @@ COPY package* ./
 
 RUN npm install
 
-COPY ./src ./
+COPY ./src ./src
+
+COPY ./public ./public
+
+COPY index.html ./
+
+COPY *.config.* ./
+
+COPY tsconfig* ./
 
 RUN npm run build
 
-CMD ["npm", "start"]
+EXPOSE 4173
+
+CMD [ "npm", "run", "preview" ]

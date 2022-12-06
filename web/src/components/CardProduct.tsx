@@ -20,8 +20,8 @@ export function CardProduct({ children, data, colorBorder = '#121212' }: CardPro
       className="flex justify-between items-center p-2 w-full bg-white shadow-md border-l-8 rounded">
       <Text 
         text={data.name} 
-        asChild={false}
         size="md"
+        color="gray-900"
       />
       <div className="flex justify-end items-center gap-3">
         { children }

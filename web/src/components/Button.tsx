@@ -1,13 +1,4 @@
 import { ReactNode } from "react"
-
-export interface ButtontIconProps {
-  text: string,
-  Icon: any
-}
-export interface ButtonWithImageProps {
-  text: string,
-  path: string
-}
 export interface ButtonRootProps {
   children: ReactNode
 }

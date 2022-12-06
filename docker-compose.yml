@@ -3,20 +3,17 @@ services:
   frontend:
     container_name: app_frontend
     build: ./web
-    working_dir: /app-frontend
     ports: 
-      - 5173:3000
+      - 3000:4173
     volumes:
-      - ./:/app-frontend
+      - ./web:/app_frontend
     depends_on:
       - backend
   backend:
-    build: ./server
     container_name: api_backend
+    build: ./server
     ports: 
       - 3001:3001
-    platform: linux/x86_64
-    working_dir: /app-backend
     environment:
       - PORT=3001
       - DB_USER=root
@@ -31,7 +28,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - ./:/app_backend
+      - ./server:/app_backend
   database:
     image: mysql:8.0.21
     container_name: database

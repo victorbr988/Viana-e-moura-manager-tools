@@ -1,4 +1,5 @@
 import { FiSettings } from "react-icons/fi"
+import { CardMovimentation } from "./components/CardMovimentation"
 import { CardNavigate } from "./components/CardNavigation"
 
 function App() {
@@ -10,9 +11,6 @@ function App() {
           <FiSettings />
         </CardNavigate.WithIcon>
       </CardNavigate.Root>
-      <div className={`w-32 h-32`}>
-
-      </div>
     </div>
   )
 }

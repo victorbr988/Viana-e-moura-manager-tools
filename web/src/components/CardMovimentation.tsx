@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { ReactNode } from "react"
 import { NavLink, useLocation } from "react-router-dom"
-import { Text } from "./Text"
 
 export interface EntranceProps {
   id?: number;
@@ -29,64 +28,45 @@ export interface CardMovimentationProps {
   variant: "entrance" | "exit";
   data: EntranceProps | ExitProps | any;
   children: ReactNode;
-  colorBorder: string
 };
 
-export function CardMovimentation({ variant, data, children, colorBorder }: CardMovimentationProps) {
+export function CardMovimentation({ variant, data, children }: CardMovimentationProps) {
   const location = useLocation()
 
   return (
     <div 
-      style={{
-        borderColor: colorBorder
-      }}
-      className=' shadow-md border-l-8 rounded flex flex-col justify-between'>
+      className=' border-teal-500 shadow-md border-l-8 rounded flex flex-col justify-between'>
       {
         variant === "exit" && (
           <div
             className="flex justify-end"
           >
-            <Text 
-              text="sm" 
-              size="xs"
-              color="white" 
-              asChild
-            > 
-              <span className={clsx('px-[8px] rounded-l-full', {
+           <span className={clsx('px-[8px] text-sm text-white rounded-l-full', {
                 "bg-red-600": data.status === 'Pendente',
                 "bg-green-600": data.status === 'Autorizado',
               })}
-              >
-                { data.status }
-              </span> 
-            </Text> 
+            >
+              { data.status }
+            </span> 
           </div>
         )
       }
       <section className="p-3">
-        <Text text={(data.toolName) as string} color="gray-900" size="lg" />
+        <h2 className="text-lg text-gray-900 text-semibold">{data.toolName}</h2>
         {
           variant === "entrance" && 
           (
-            <Text 
-              size="sm" 
-              color="gray-900" 
-              asChild
-            > 
-              <p>Adicionado por { data.supervisorName }</p> 
-            </Text> 
+            <p className="text-sm text-slate-500">Adicionado por { data.supervisorName }</p>
           )
         }
 
         <div className="flex justify-between items-center mt-4">
-          <Text size="sm" color="gray-900" asChild>
-            <NavLink 
+          <NavLink 
               to={`${location.pathname}/${data.id}`}
-              className="hover:text-gray-600 underline-offset-4 underline"
+              className="hover:text-gray-600 underline-offset-4 text-sm text-gray-900 underline"
             >
               Detalhes
             </NavLink> 
-          </Text>
           <div className="flex gap-2 items-center">
             {children}
           </div>

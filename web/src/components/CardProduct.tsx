@@ -1,5 +1,4 @@
 import { ReactNode } from "react"
-import { Text } from "./Text";
 
 export interface DataProps {
   id?: number;
@@ -13,16 +12,11 @@ export interface CardProductProps {
   colorBorder?: string;
 }
 
-export function CardProduct({ children, data, colorBorder = '#121212' }: CardProductProps ) {
+export function CardProduct({ children, data }: CardProductProps ) {
   return (
     <div 
-      style={{borderColor: colorBorder}}
-      className="flex justify-between items-center p-2 w-full bg-white shadow-md border-l-8 rounded">
-      <Text 
-        text={data.name} 
-        size="md"
-        color="gray-900"
-      />
+      className="flex justify-between items-center p-2 w-full border-teal-500 bg-white shadow-md border-l-8 rounded">
+        <h2>{data.name}</h2>
       <div className="flex justify-end items-center gap-3">
         { children }
       </div>

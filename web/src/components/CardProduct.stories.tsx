@@ -23,7 +23,6 @@ export default {
       </>
     ),
     data: mockData,
-    colorBorder: randonColor()
   },
   argTypes: {
     children: {
@@ -36,7 +35,6 @@ export default {
         disable: true
       }
     },
-    colorBorder: { control: { type: 'color'} }
   }
 } as Meta<CardProductProps>
 

@@ -1,16 +1,9 @@
-import { FiSettings } from "react-icons/fi"
-import { CardMovimentation } from "./components/CardMovimentation"
-import { CardNavigate } from "./components/CardNavigation"
+import { Sidebar } from "./components/sidebar"
 
 function App() {
   return (
-    <div className="App">
-      <CardNavigate.Root route="/">
-        <CardNavigate.WithIcon>
-          <span>testando</span>
-          <FiSettings />
-        </CardNavigate.WithIcon>
-      </CardNavigate.Root>
+    <div className="min-h-screen">
+      <Sidebar />
     </div>
   )
 }

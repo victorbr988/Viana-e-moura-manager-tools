@@ -1,6 +1,5 @@
 import { withRouter } from 'storybook-addon-react-router-v6';
 import { Meta, StoryObj } from "@storybook/react";
-import { randonColor } from '../utils/randonColor';
 import { CardMovimentation, CardMovimentationProps } from './CardMovimentation';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import { Fragment } from 'react';
@@ -43,13 +42,12 @@ export default {
 
   args: {
     route: '/entrance',
-    colorBorder: randonColor(),
     variant: "entrance",
     data: mockDataEntrance,
     children: (
       <Fragment>
-        <FiEdit className='text-green-600 cursor-pointer' />
-        <FiTrash2 className='text-red-600 cursor-pointer' />
+        <FiEdit className='text-green-600 cursor-pointer text-lg' />
+        <FiTrash2 className='text-red-600 cursor-pointer text-lg' />
       </Fragment>
     )
   },
@@ -79,13 +77,12 @@ export const Default: StoryObj<CardMovimentationProps> = {}
 
 export const CardMovimentationExitAuthorized:StoryObj<CardMovimentationProps> = {
   args: {
-    colorBorder: randonColor(),
     variant: "exit",
     data: mockDataExitAuthorized,
     children: (
       <Fragment>
-        <FiEdit className='text-green-600 cursor-pointer' />
-        <FiTrash2 className='text-red-600 cursor-pointer' />
+        <FiEdit className='text-green-600 cursor-pointer text-lg' />
+        <FiTrash2 className='text-red-600 cursor-pointer text-lg' />
       </Fragment>
     )
   },
@@ -100,7 +97,6 @@ export const CardMovimentationExitAuthorized:StoryObj<CardMovimentationProps> = 
         disable: true
       }
     },
-    colorBorder: { control: { type: 'color'} },
     variant: {
       table: {
         disable: true
@@ -111,13 +107,12 @@ export const CardMovimentationExitAuthorized:StoryObj<CardMovimentationProps> = 
 
 export const CardMovimentationExitUnauthorized:StoryObj<CardMovimentationProps> = {
   args: {
-    colorBorder: randonColor(),
     variant: "exit",
     data: mockDataExitUnauthorized,
     children: (
       <Fragment>
-        <FiEdit className='text-green-600 cursor-pointer' />
-        <FiTrash2 className='text-red-600 cursor-pointer' />
+        <FiEdit className='text-green-600 cursor-pointer text-lg' />
+        <FiTrash2 className='text-red-600 cursor-pointer text-lg' />
       </Fragment>
     )
   },
@@ -132,7 +127,6 @@ export const CardMovimentationExitUnauthorized:StoryObj<CardMovimentationProps> 
         disable: true
       }
     },
-    colorBorder: { control: { type: 'color'} },
     variant: {
       table: {
         disable: true

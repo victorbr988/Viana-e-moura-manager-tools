@@ -10,9 +10,10 @@ export function Sidebar() {
 
   return (
     <aside className={clsx(`fixed shadow-lg transition-all ease-linear bg-slate-200 h-screen hidden md:block`, {
-      "w-[250px]": rotateArrow === false,
-      "w-20": rotateArrow === true
-    })}>
+        "w-[250px]": rotateArrow === false,
+        "w-20": rotateArrow === true
+      })}
+    >
       <img 
         src={arrowRightCircle}
         alt="imagem de uma seta"
@@ -35,51 +36,38 @@ export function Sidebar() {
 
       <section className="mt-10">
         <CardNavigation route="/tools">
-            <div className="w-full pl-5 flex gap-2">
-              <FiSettings className="group-hover:text-teal-500 text-xl" />
-              <h2 className={clsx('group-hover:text-teal-500', {
-                "hidden": rotateArrow === true
-              })}>Ferramentas</h2>
-            </div>
+          <FiSettings className="group-hover:text-teal-500 text-xl" />
+          <h2 className={clsx('group-hover:text-teal-500', {
+            "hidden": rotateArrow === true
+          })}>Ferramentas</h2>
         </CardNavigation>
 
         <CardNavigation route="/supervisors">
-          <div className="w-full pl-5 flex gap-2">
-            <FiUsers className="group-hover:text-teal-500 text-xl" />
-            <h2 className={clsx('group-hover:text-teal-500', {
-              "hidden": rotateArrow === true,
-            })}>Supervisores</h2>
-          </div>
+          <FiUsers className="group-hover:text-teal-500 text-xl" />
+          <h2 className={clsx('group-hover:text-teal-500', {
+            "hidden": rotateArrow === true,
+          })}>Supervisores</h2>
         </CardNavigation>
 
         <CardNavigation route="/enterprises">
-          <div className="flex gap-2 w-full pl-5">
-            <FiGrid className="group-hover:text-teal-500 text-xl" />
-            <h2 className={clsx('group-hover:text-teal-500', {
-              "hidden": rotateArrow === true
-            })}>Empreendimentos</h2>
-          </div>
-          
+          <FiGrid className="group-hover:text-teal-500 text-xl" />
+          <h2 className={clsx('group-hover:text-teal-500', {
+            "hidden": rotateArrow === true
+          })}>Empreendimentos</h2>
         </CardNavigation>
 
         <CardNavigation route="/entrance">
-          <div className="flex gap-2 w-full pl-5">
-            <FiArrowUpCircle className="group-hover:text-teal-500 text-xl" />
-            <h2 className={clsx('group-hover:text-teal-500', {
-              "hidden": rotateArrow === true
-            })}>Entradas</h2>
-          </div>
-          
+          <FiArrowUpCircle className="group-hover:text-teal-500 text-xl" />
+          <h2 className={clsx('group-hover:text-teal-500', {
+            "hidden": rotateArrow === true
+          })}>Entradas</h2>
         </CardNavigation>
 
         <CardNavigation route="/exit">
-          <div className="flex gap-2 w-full pl-5">
-            <FiArrowDownCircle className="group-hover:text-teal-500 text-xl" />
-            <h2 className={clsx('group-hover:text-teal-500', {
-              "hidden": rotateArrow === true
-            })}>Saídas</h2>
-          </div>
-          
+          <FiArrowDownCircle className="group-hover:text-teal-500 text-xl" />
+          <h2 className={clsx('group-hover:text-teal-500', {
+            "hidden": rotateArrow === true
+          })}>Saídas</h2>
         </CardNavigation>
       </section>
 

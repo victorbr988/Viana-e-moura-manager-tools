@@ -9,7 +9,7 @@ export function Sidebar() {
   const [rotateArrow, setRotateArrow] = useState<boolean>(false)
 
   return (
-    <aside className={clsx(`fixed shadow-lg transition-all ease-linear bg-slate-200 h-screen hidden md:block`, {
+    <aside className={clsx(`absolute shadow-lg transition-all ease-linear bg-slate-100 h-full hidden md:block`, {
         "w-[250px]": rotateArrow === false,
         "w-20": rotateArrow === true
       })}
@@ -26,7 +26,7 @@ export function Sidebar() {
       />
 
       <section className="flex items-center gap-3 p-5">
-        <div className="h-10 w-10 bg-teal-500 text-white rounded-full flex justify-center items-center">
+        <div className="h-10 w-10 bg-[#0066FF] text-white rounded-full flex justify-center items-center">
           V
         </div>
         <span className={clsx(`text-lg text-gray-900`, {
@@ -36,44 +36,44 @@ export function Sidebar() {
 
       <section className="mt-10">
         <CardNavigation route="/tools">
-          <FiSettings className="group-hover:text-teal-500 text-xl" />
-          <h2 className={clsx('group-hover:text-teal-500', {
+          <FiSettings className="group-hover:text-[#0066FF] text-xl" />
+          <h2 className={clsx('group-hover:text-[#0066FF]', {
             "hidden": rotateArrow === true
           })}>Ferramentas</h2>
         </CardNavigation>
 
         <CardNavigation route="/supervisors">
-          <FiUsers className="group-hover:text-teal-500 text-xl" />
-          <h2 className={clsx('group-hover:text-teal-500', {
+          <FiUsers className="group-hover:text-[#0066FF] text-xl" />
+          <h2 className={clsx('group-hover:text-[#0066FF]', {
             "hidden": rotateArrow === true,
           })}>Supervisores</h2>
         </CardNavigation>
 
         <CardNavigation route="/enterprises">
-          <FiGrid className="group-hover:text-teal-500 text-xl" />
-          <h2 className={clsx('group-hover:text-teal-500', {
+          <FiGrid className="group-hover:text-[#0066FF] text-xl" />
+          <h2 className={clsx('group-hover:text-[#0066FF]', {
             "hidden": rotateArrow === true
           })}>Empreendimentos</h2>
         </CardNavigation>
 
         <CardNavigation route="/entrance">
-          <FiArrowUpCircle className="group-hover:text-teal-500 text-xl" />
-          <h2 className={clsx('group-hover:text-teal-500', {
+          <FiArrowUpCircle className="group-hover:text-[#0066FF] text-xl" />
+          <h2 className={clsx('group-hover:text-[#0066FF]', {
             "hidden": rotateArrow === true
           })}>Entradas</h2>
         </CardNavigation>
 
         <CardNavigation route="/exit">
-          <FiArrowDownCircle className="group-hover:text-teal-500 text-xl" />
-          <h2 className={clsx('group-hover:text-teal-500', {
+          <FiArrowDownCircle className="group-hover:text-[#0066FF] text-xl" />
+          <h2 className={clsx('group-hover:text-[#0066FF]', {
             "hidden": rotateArrow === true
           })}>Saídas</h2>
         </CardNavigation>
       </section>
 
-      <NavLink to="/login" className="flex gap-2 w-full items-center absolute bottom-5 cursor-pointer left-8 group hover:text-teal-500">
+      <NavLink to="/login" className="flex gap-2 w-full items-center absolute bottom-5 cursor-pointer left-8 group hover:text-[#0066FF]">
         <FiLogOut className="text-lg" />
-        <span className={clsx(`text-lg text-gray-900  group-hover:text-teal-500`, {
+        <span className={clsx(`text-lg text-gray-900  group-hover:text-[#0066FF]`, {
           "hidden": rotateArrow === true
         })}>Sair</span>
       </NavLink>

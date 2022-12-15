@@ -1,7 +1,5 @@
-import clsx from "clsx";
-import { ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
-import { randonColor } from '../utils/randonColor'
 
 export interface CardNavigationProps {
   route: string,

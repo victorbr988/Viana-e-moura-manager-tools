@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { FiArrowDownCircle, FiArrowUpCircle, FiGrid, FiLogOut, FiSettings, FiUsers } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 import arrowRightCircle from '../assets/arrow-rigth.svg'

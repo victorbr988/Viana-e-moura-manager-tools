@@ -15,7 +15,7 @@ type ModalLabelProps = ModalContentProps
 
 function ModalRoot({title, children}: ModalRootProps) {
   return (
-    <form className="bg-gray-100 w-[400px] justify-center flex flex-col px-11 pb-8">
+    <form className="bg-white shadow-lg rounded-lg w-[400px] justify-center flex flex-col px-11 gap-5 pb-8">
       <h2 className="text-gray-900 text-center text-xl py-5">{title}</h2>
       {children}
     </form>
@@ -32,7 +32,7 @@ function ModalContent({children}: ModalContentProps) {
 
 function ModalLabel({children}: ModalLabelProps) {
   return (
-    <label className="flex gap-2 focus-within:border-[#0066FF] border-b-2 border-gray-900 items-center w-full p-1">
+    <label className="flex gap-2 focus-within:border-[#0066FF] border-2 border-gray-200 rounded items-center w-full p-2">
       {children}
     </label>
   )

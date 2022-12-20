@@ -1,16 +1,13 @@
 FROM node:16.14-alpine
 
-WORKDIR /app-frontend
+WORKDIR /usr/app-frontend
 
 COPY package* ./
 
 RUN npm install
 
-COPY ./src ./src
-
 COPY . .
 
-RUN npm run build
+RUN ls -al
 
-
-CMD [ "npm", "run", "preview" ]
+CMD [ "npm", "run", "dev" ]

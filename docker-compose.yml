@@ -1,40 +1,66 @@
 version: '3.9'
 services:
   frontend:
+    # Nome do container
     container_name: app_frontend
+    # Caminho onde está o Dockerfile do frontend
     build: ./web
-    ports: 
-      - 3000:4173
+    # Bind de portas para conectar a porta do contêiner com a porta do vite de ambiente de desenvolvimento
+    ports:
+      - 3000:5173
+    # Arquivos que atualizarão caso aconteça alguma mudança
     volumes:
-      - ./web:/app_frontend
+      - ./web/src:/usr/app-frontend/src
+    # Sempre reiniciar o contêiner caso algo dê errado
+    restart: always
+    # O frontend depende do backend para ser iniciado
     depends_on:
       - backend
   backend:
+   # Nome do container
     container_name: api_backend
+    # Caminho onde está o Dockerfile do backend
     build: ./server
+    # Bind de portas para conectar a porta do contêiner com a porta padrão do backend
     ports: 
       - 3001:3001
+    # Variáveis de ambiente para funcionamento do backend e conexão com o banco de dados
     environment:
       - PORT=3001
-      - DATABASE_URL=mysql://root:123456@localhost:3302/database
+      - DATABASE_URL=mysql://root:123456@localhost:3306/database
+    # O backend depende do banco de dados estar online
     depends_on:
       database:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "lsoft", "-t", "-i:3001"]
-      timeout: 10s
-      retries: 5
+    # Sempre reiniciar o contêiner caso algo dê errado
+    restart: always
+    # Arquivos que atualizarão caso aconteça alguma mudança
     volumes:
       - ./server:/app_backend
   database:
+    #imagem do mysql
     image: mysql:8.0.21
+    # Nome do contêiner
     container_name: database
+    # Bind de portas para conectar a porta do contêiner com a porta padrão do MySQL
     ports:
-      - 3002:3302
+      - 3306:3306
+    # Variáveis de ambiente para permitir acesso ao banco de dados com a senha de usuário root do Docker
     environment:
       - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=database
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123456
+    # Sempre reiniciar o contêiner caso algo dê errado
     restart: always
+    # O docker fará pequenas conxões para validar o funcionamento do DB a cada 10s por 5 vezes
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-p$$MYSQL_ROOT_PASSWORD' ]
       timeout: 10s
       retries: 5
+    volumes:
+      - db-volume:/var/lib/mysql
+    cap_add:
+      - SYS_NICE
+volumes:
+  db-volume:

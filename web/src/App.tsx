@@ -1,17 +1,10 @@
-import { FiSettings } from "react-icons/fi"
-import { Modal } from "./components/Modal"
+import { HomeLogin } from "./pages/Home-login"
+
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Modal.Root title="Adicionar uma ferramenta">
-        <Modal.Content>
-          <Modal.Label>
-            <FiSettings />
-            <Modal.Input type="text" placeholder="Adicionar uma ferramenta" />
-          </Modal.Label>
-        </Modal.Content>
-      </Modal.Root>
+    <div className="min-h-screen grid place-items-center">
+     <HomeLogin />
     </div>
   )
 }

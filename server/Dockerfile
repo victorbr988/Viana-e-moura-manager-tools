@@ -1,13 +1,15 @@
-FROM node:16.14-alpine
+FROM node:16.15-alpine
 
 WORKDIR /app-backend
 
 COPY package*.json ./
 
+COPY ./prisma ./prisma
+
+COPY tsconfig.json ./
+
 RUN npm install
 
 COPY . .
-
-RUN npx prisma generate
 
 CMD ["npm", "run", "dev"]

@@ -27,7 +27,7 @@ services:
     # Variáveis de ambiente para funcionamento do backend e conexão com o banco de dados
     environment:
       - PORT=3001
-      - DATABASE_URL=mysql://root:123456@localhost:3306/database
+      - DATABASE_URL=mysql://root:123456@database:3306/database
     # O backend depende do banco de dados estar online
     depends_on:
       database:

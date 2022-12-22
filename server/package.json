@@ -8,6 +8,7 @@
     "start": "node ./dist/service.js",
     "test": "vitest",
     "view:db": "npx prisma studio",
+    "deploy-migrate": "npx prisma migrate deploy",
     "dev": "nodemon ./src/service.ts"
   },
   "keywords": [],

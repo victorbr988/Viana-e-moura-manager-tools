@@ -1,39 +1,37 @@
 import { FiLock, FiLogIn, FiMail } from "react-icons/fi"
 import { ButtonAdd, ButtonSecondary } from "../components/Button"
 import { Modal } from "../components/Modal"
-import { Fragment, useEffect, useState } from "react"
-import { toast } from "react-hot-toast"
-import { observerUser } from "../firebase/observerUser"
-import { createUser } from "../firebase/createUserWithEmailAndPassword"
+import { Fragment, useContext, useState } from "react"
 import phonePreview from "../../public/phone-preview.svg"
+import { Footer } from "../components/Footer"
+import { AuthContext } from "../context/Context-provider"
+import { toast } from "react-hot-toast"
 
 export function HomeLogin() {
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const contextState = useContext(AuthContext)
 
   async function handleSignin() {
+    contextState.setEmail(email)
+    contextState.setPassword(password)
     try {
-      toast.promise(
-        createUser(email, password),
-        {
-          loading: "Validando os dados",
-          success: "Acesso permitido",
-          error: (err) => err.message
-        }
-      )
-      setEmail("")
-      setPassword("")
-    } catch(err) {
+      toast.loading("Validando dados")
+      await contextState.createUser()
+      toast.dismiss()
+
+      setEmail('')
+      setPassword('')
+    } catch(err: any) {
+      toast.dismiss()
+      toast.error(err.message)
       console.log(err)
     }
   }
-  useEffect(() => {
-    return observerUser()
-  }, [])
 
   return (
     <Fragment>
-      <main className="flex w-full justify-center">
+      <main className="flex min-h-screen w-full justify-center items-center">
         <section className="w-1/2 hidden lg:visible lg:flex justify-center items-center border-r-[1px] border-gray-900">
           <img className="w-[350px] rounded-xl" src={phonePreview} alt="Imagem de um celular com uma página aberta" />
         </section>
@@ -61,6 +59,7 @@ export function HomeLogin() {
           </Modal.Root>
         </section>
       </main>
+      <Footer />
     </Fragment>
   )
 }

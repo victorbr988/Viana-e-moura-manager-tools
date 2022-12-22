@@ -8,6 +8,8 @@ COPY ./prisma ./prisma
 
 COPY tsconfig.json ./
 
+COPY .env ./
+
 RUN npm install
 
 COPY . .

@@ -36,6 +36,7 @@ model Entrance {
   supervisorName  String
   quantity        Int
   unitPrice       Float
+  userId          String
 }
 
 model Exit {
@@ -51,4 +52,5 @@ model Exit {
   quantity        Int
   account         String
   subAccount      String
+  userId          String
 }

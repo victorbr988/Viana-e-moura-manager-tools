@@ -1,13 +1,12 @@
-import { Footer } from "./components/Footer"
-import { HomeLogin } from "./pages/Home-login"
+import { AuthProvider } from "./context/Auth-provider"
+import { Pagination } from "./Routes/Pagination"
 
 
 function App() {
   return (
-    <div className="min-h-screen w-full flex justify-center items-center">
-     <HomeLogin />
-     <Footer />
-    </div>
+    <AuthProvider>
+      <Pagination />
+    </AuthProvider>
   )
 }
 

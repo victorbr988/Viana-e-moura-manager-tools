@@ -1,13 +1,16 @@
 # Viana & Moura Construções
 ### Backend do sistema de gerenciamento de ferramentas que fiz para Viana e Moura Construções, Utilizei Prisma como ORM, Typescript como principal stack, juntamente com NodeJs.
 
-### Veja aqui o [Diagrama de entidades](https://github.com/victorbr988/V-M-Backend-manager-tools/blob/main/Diagrama_entidade.png)
-
 ## Documentação da API
 
-### Ferramentas
+### Endpoints
+<hr />
+<details>
+  <summary>Ferramentas</summary>
+  <hr />
 
-```shel
+  #### Buscar todas as ferramentas
+  ```shel
   GET /tools
 ```
 
@@ -24,6 +27,7 @@
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `number` | **Obrigatório**. O ID do item que você quer |
+| `name`      | `string` | **Obrigatório**. O nome do item que você quer |
 
 #### Deletar uma ferramenta
 
@@ -44,9 +48,13 @@
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `name`      | `string` | **Obrigatório**. O nome do item que você quer |
+</details>
 
+<details>
+  <summary>Supervisores</summary>
+  <hr />
 
-### Supervisores
+  #### Buscar por todos os supervisores
 
 ```shel
   GET /supervisors
@@ -65,6 +73,8 @@
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `number` | **Obrigatório**. O ID do item que você quer |
+| `name`      | `string` | **Obrigatório**. O nome do supervisor que você quer |
+| `sector`      | `string` | **Obrigatório**. O nome do setor do supervisor |
 
 #### Deletar um supervisor
 
@@ -86,8 +96,13 @@
 | :---------- | :--------- | :------------------------------------------ |
 | `name`      | `string` | **Obrigatório**. O nome do supervisor que você quer |
 | `sector`      | `string` | **Obrigatório**. O nome do setor do supervisor |
+</details>
 
-### Empreendimentos
+<details>
+  <summary>Empreendimentos</summary>
+  <hr/>
+
+  #### Buscar todos os empreendimentos
 
 ```shel
   GET /enterprises
@@ -106,6 +121,7 @@
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `id`      | `number` | **Obrigatório**. O ID do item que você quer |
+| `name`      | `string` | **Obrigatório**. O nome do item que você quer |
 
 #### Deletar um empreendimento
 
@@ -126,8 +142,13 @@
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `name`      | `string` | **Obrigatório**. O nome do item que você quer |
+</details>
 
-### Entrada de ferramentas
+<details>
+  <summary>Entrada de ferramentas</summary>
+  <hr/>
+
+### Buscar todas as entradas
 
 ```shel
   GET /entrance
@@ -176,7 +197,13 @@
 | `quantity`| `number` | **Obrigatório**. A quantidade de itens |
 | `unitPrice`| `float` | **Obrigatório**. O valor unitário |
 
-### Saída de ferramentas
+</details>
+
+<details>
+  <summary>Saída de ferramentas</summary>
+  <hr/>
+
+### Buscar todas as saídas de ferramentas
 
 ```shel
   GET /exit
@@ -232,3 +259,9 @@
 | `quantity`| `string` | **Obrigatório**. Quantidade de ferramentas liberadas |
 | `account`| `string` | **Obrigatório**. O nome da conta |
 | `subAccount`| `string` | **Obrigatório**. O nome da subconta |
+</details>
+
+### Diagrama de entidades
+<hr/>
+
+<img src="/Users/victor/viana-e-moura-project/server/Diagrama_entidade.png" />

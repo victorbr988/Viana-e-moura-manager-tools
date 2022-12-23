@@ -4,7 +4,7 @@
 ## Documentação da API
 
 ### Endpoints
-<hr />
+<br />
 <details>
   <summary>Ferramentas</summary>
   <hr />

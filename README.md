@@ -29,10 +29,23 @@ Viana e Moura construções mas também utilizar relatórios como base para toma
   3. Utilize o comando para criar os contêineres
   
   ```sh
-    npm run deploy:docker
+    docker-compose up -d --build
   ```
-  <p>Este comando irá criar os contêineres necessários, frontend, backend e banco de dados. Também irá popular o banco de dados com todas as tabelas necessárias</p> 
+  <p>Este comando irá criar os contêineres necessários, frontend, backend e banco de dados.</p>
+  <br />
+  4. Utilize o comando para popular o banco de dados
+
+  ```sh
+    cd server && npx prisma migrate deploy
+  ``` 
   ⚠️ <strong>O comando deve ser digitado no terminal da pasta principal do projeto.</strong>
+  <br />
+
+  5(opcional). Caso queira parar os serviços no Docker, baste utilizar na raiz do projeto
+
+  ```sh
+    docker-compose down
+  ```
 </details>
 
 <details>

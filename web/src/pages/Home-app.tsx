@@ -1,11 +1,12 @@
-import { useContext } from "react"
-import { AuthContext } from "../context/Context-provider"
+import managerIcon from "../assets/manager-icon.svg"
 
 export function HomeApp() {
-  const contextState = useContext(AuthContext)
-  const userCredential = contextState.userLogged
 
   return (
-    <p>{`Bem vindo ${userCredential?.displayName || userCredential?.email}`}</p>
+    <div className="flex flex-col justify-center items-center w-full gap-3">
+      <img src={managerIcon} className="md:w-80 md:h-80 w-40 h-40" alt="ícone de um homem" />
+      <p className="text-xl text-semibold text-gray-600">Agora você pode gerenciar seu estoque mais facilmente!</p>
+    </div>
+    
   )
 }

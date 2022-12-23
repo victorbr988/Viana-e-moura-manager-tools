@@ -11,7 +11,7 @@ export function CardNavigation({ route = '/', children }: CardNavigationProps) {
 
   return (
     <button
-      className={`cursor-pointer w-full text-lg hover:bg-gray-50 group rounded text-gray-900 flex items-center gap-2 p-5`}
+      className='navigation-card-style'
       onClick={ () => navigation(route) }
     >
       {children}

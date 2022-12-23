@@ -18,7 +18,7 @@ export function Sidebar() {
 
   return (
     <Fragment>
-      <aside className="flex flex-col w-64 h-screen px-4 py-8 bg-white border-r">
+      <aside className="flex flex-col w-64 min-h-screen px-4 py-8 bg-white border-r">
         <header>
           <h2 className="text-3xl font-semibold text-center text-gray-800">Viana & Moura</h2>
           <p className="mx-2 mt-1 text-sm font-medium text-gray-600 text-center">{userCredential?.email || "anônimo@gmail.com"}</p>

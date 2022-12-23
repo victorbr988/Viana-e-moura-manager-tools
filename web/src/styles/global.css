@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navigation-card-style {
+  @apply cursor-pointer w-full text-lg hover:bg-gray-50 hover:shadow-md rounded text-gray-900 flex items-center gap-2 p-5
+}

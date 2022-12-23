@@ -58,6 +58,7 @@ Viana e Moura construções mas também utilizar relatórios como base para toma
     </tr>
   </table>
    <br/>
-   Para ver os detalhes do servidor e estar a par de todas as rotas usadas e seus parâmetros necessários, consulte <a href="https://github.com/victorbr988/Viana-e-moura-manager-tools/blob/main/server/README.md" target="_blank">Aqui</a>.
+   Para ver os detalhes do servidor e estar a par de todas as rotas usadas e seus parâmetros necessários, veja <a href="https://github.com/victorbr988/Viana-e-moura-manager-tools/blob/main/server/README.md" target="_blank">Aqui</a>.
+   <br />
   Para ver os detalhes da página web consulte  <a href="https://github.com/Viana-e-moura-manager-tools/web/README.md" target="_blank">Aqui</a>.
 </details>

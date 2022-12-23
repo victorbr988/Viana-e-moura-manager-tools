@@ -10,18 +10,8 @@ import { ContextProps, AuthProviderProps } from "./types";
 
 const provider = new GoogleAuthProvider();
 
-function validateFields(email: string, password: string) {
-  const regex = /\S+@\S+\.\S+/
-  if (!regex.test(email)) return customErrors.INVALID_EMAIL
-  if (password.length < 3) return customErrors.INVALID_PASSWORD
-
-  return true
-}
-
 export function AuthProvider({ children }: AuthProviderProps) {
   const [userLogged, setUserLogged] = useState<User | null>(null);
-  const [email, setEmail] = useState<string>("")
-  const [password, setPassword] = useState<string>("")
   const [
     createUserWithEmailAndPassword,
     user,
@@ -39,21 +29,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const contextType: ContextProps = {
     userLogged,
     setUserLogged,
-    email,
-    setEmail,
-    password,
-    setPassword,
     createUser,
     loading,
     user,
     createAccountWithGoogle
   }
 
-  async function createUser() {
+  async function createUser(email: string, password: string) {
+    console.log({email, password})
     try {
-      if (validateFields(email, password) === customErrors.INVALID_PASSWORD) throw new Error("Senha inválida")
-      if (validateFields(email, password) === customErrors.INVALID_EMAIL) throw new Error("E-mail inválido")
-      
       const userExist = await siginUser(email, password)
   
       if (userExist === customErrors.WRONG_PASSWORD) {
@@ -62,7 +46,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   
       if (userExist === customErrors.NOT_FOUND) {
         const userCredential = await createUserWithEmailAndPassword(email, password)
+        navigate("/home-app")
         return userCredential?.user
+      }
+
+      if (userExist === customErrors.INVALID_EMAIL) {
+        throw new Error("Email no formato inválido")
       }
     } catch(err: any) {
       throw err
@@ -75,7 +64,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // const credential = GoogleAuthProvider.credentialFromResult(userCredential);
       // const token = credential?.accessToken;
       // const user = userCredential.user;
-      navigate('home-app')
+      navigate('/home-app')
     } catch(err) {
       throw err
     }

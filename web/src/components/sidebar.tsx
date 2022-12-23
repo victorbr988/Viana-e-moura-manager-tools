@@ -1,82 +1,68 @@
-import clsx from "clsx";
-import { useState } from "react";
-import { FiArrowDownCircle, FiArrowUpCircle, FiGrid, FiLogOut, FiSettings, FiUsers } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
-import arrowRightCircle from '../assets/arrow-rigth.svg'
+import { useContext, Fragment } from "react";
+import { FiActivity, FiArrowDownCircle, FiArrowUpCircle, FiGrid, FiLogOut, FiSettings, FiUsers } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import { CardNavigation } from "./CardNavigation";
+import { AuthContext } from "../context/Context-provider"
+import { User } from "firebase/auth";
+import {disconect} from "../firebase/disconectUser"
 
 export function Sidebar() {
-  const [rotateArrow, setRotateArrow] = useState<boolean>(false)
+  const contextState = useContext(AuthContext)
+  const userCredential: User | null = contextState.userLogged
+  const navigate = useNavigate()
+
+  async function handleClick() {
+    await disconect()
+    navigate("/")
+  }
 
   return (
-    <aside className={clsx(`absolute shadow-lg transition-all ease-linear bg-slate-100 h-full hidden md:block`, {
-        "w-[250px]": rotateArrow === false,
-        "w-20": rotateArrow === true
-      })}
-    >
-      <img 
-        src={arrowRightCircle}
-        alt="imagem de uma seta"
-        className={clsx(`absolute right-0 top-16 cursor-pointer transition-all ease-linear`, {
-          "rotate-180": rotateArrow === true || false
-        })}
-        onClick={() => {
-          setRotateArrow(!rotateArrow)
-        }}
-      />
+    <Fragment>
+      <aside className="flex flex-col w-64 h-screen px-4 py-8 bg-white border-r">
+        <header>
+          <h2 className="text-3xl font-semibold text-center text-gray-800">Viana & Moura</h2>
+          <p className="mx-2 mt-1 text-sm font-medium text-gray-600 text-center">{userCredential?.email || "anônimo@gmail.com"}</p>
+        </header>
+        <main className="flex flex-col justify-between flex-1 mt-6">
+            <nav>
+                <CardNavigation route="/tools">
+                  <FiSettings />
+                  <span>Ferramentas</span>
+                </CardNavigation>
 
-      <section className="flex items-center gap-3 p-5">
-        <div className="h-10 w-10 bg-[#0066FF] text-white rounded-full flex justify-center items-center">
-          V
-        </div>
-        <span className={clsx(`text-lg text-gray-900`, {
-          "hidden": rotateArrow === true
-        })}>Victor</span>
-      </section>
+                <CardNavigation route="/enterprises">
+                  <FiGrid />
+                  <span>Empreendimentos</span>
+                </CardNavigation>
 
-      <section className="mt-10">
-        <CardNavigation route="/tools">
-          <FiSettings className="group-hover:text-[#0066FF] text-xl" />
-          <h2 className={clsx('group-hover:text-[#0066FF]', {
-            "hidden": rotateArrow === true
-          })}>Ferramentas</h2>
-        </CardNavigation>
+                <CardNavigation route="/supervisors">
+                  <FiUsers />
+                  <span>Supervisores</span>
+                </CardNavigation>
 
-        <CardNavigation route="/supervisors">
-          <FiUsers className="group-hover:text-[#0066FF] text-xl" />
-          <h2 className={clsx('group-hover:text-[#0066FF]', {
-            "hidden": rotateArrow === true,
-          })}>Supervisores</h2>
-        </CardNavigation>
+                <CardNavigation route="entrance">
+                  <FiArrowUpCircle />
+                  <span>Entradas</span>
+                </CardNavigation>
 
-        <CardNavigation route="/enterprises">
-          <FiGrid className="group-hover:text-[#0066FF] text-xl" />
-          <h2 className={clsx('group-hover:text-[#0066FF]', {
-            "hidden": rotateArrow === true
-          })}>Empreendimentos</h2>
-        </CardNavigation>
+                <CardNavigation route="exit">
+                  <FiArrowDownCircle />
+                  <span>Saídas</span>
+                </CardNavigation>
 
-        <CardNavigation route="/entrance">
-          <FiArrowUpCircle className="group-hover:text-[#0066FF] text-xl" />
-          <h2 className={clsx('group-hover:text-[#0066FF]', {
-            "hidden": rotateArrow === true
-          })}>Entradas</h2>
-        </CardNavigation>
+                <CardNavigation route="dashboard">
+                  <FiActivity />
+                  <span>Dashboard</span>
+                </CardNavigation>
 
-        <CardNavigation route="/exit">
-          <FiArrowDownCircle className="group-hover:text-[#0066FF] text-xl" />
-          <h2 className={clsx('group-hover:text-[#0066FF]', {
-            "hidden": rotateArrow === true
-          })}>Saídas</h2>
-        </CardNavigation>
-      </section>
-
-      <NavLink to="/login" className="flex gap-2 w-full items-center absolute bottom-5 cursor-pointer left-8 group hover:text-[#0066FF]">
-        <FiLogOut className="text-lg" />
-        <span className={clsx(`text-lg text-gray-900  group-hover:text-[#0066FF]`, {
-          "hidden": rotateArrow === true
-        })}>Sair</span>
-      </NavLink>
-    </aside>
+                <button onClick={handleClick} className='navigation-card-style'>
+                  <FiLogOut />
+                  <span>Sair</span>
+                </button>
+            </nav>
+        </main>
+      </aside>
+    </Fragment>
+    
   )
 }

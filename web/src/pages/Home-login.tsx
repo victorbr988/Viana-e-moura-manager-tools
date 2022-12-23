@@ -13,11 +13,11 @@ export function HomeLogin() {
   const contextState = useContext(AuthContext)
 
   async function handleSignin() {
-    contextState.setEmail(email)
-    contextState.setPassword(password)
+    const regex = /\S+@\S+\.\S+/
+    if (!regex.test(email)) return toast.error('Email inválido')
     try {
       toast.loading("Validando dados")
-      await contextState.createUser()
+      await contextState.createUser(email, password)
       toast.dismiss()
 
       setEmail('')

@@ -1,30 +1,14 @@
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, User, UserCredential } from "firebase/auth";
+import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, User } from "firebase/auth";
 import { siginUser } from "../firebase/signinUserWithEmailAndPassword";
-import { ReactNode, useEffect, useState } from "react";
+import { ProviderProps, ReactNode, useEffect, useState } from "react";
 import { auth } from "../firebase/firebase-init";
 import { AuthContext } from "./Context-provider";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { customErrors } from "../errors/customErrors";
 import { useNavigate } from "react-router-dom";
+import { ContextProps } from "./types";
 
 const provider = new GoogleAuthProvider();
-
-interface ProviderProps {
-  children: ReactNode
-}
-
-export interface ContextProps {
-  userLogged: User | null;
-  setUserLogged: React.Dispatch<React.SetStateAction<User | null>>;
-  email: string;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  password: string;
-  setPassword: React.Dispatch<string>;
-  createUser: () => Promise<User | undefined>;
-  loading: boolean,
-  user: UserCredential | undefined;
-  createAccountWithGoogle(): Promise<void>
-}
 
 function validateFields(email: string, password: string) {
   const regex = /\S+@\S+\.\S+/
@@ -34,7 +18,7 @@ function validateFields(email: string, password: string) {
   return true
 }
 
-export function AuthProvider({ children }: ProviderProps) {
+export function AuthProvider({ children }: ProviderProps<ReactNode>) {
   const [userLogged, setUserLogged] = useState<User | null>(null);
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")

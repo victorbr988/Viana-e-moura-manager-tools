@@ -16,7 +16,8 @@ export class EntranceController {
       supervisorName,
       addedAt,
       quantity,
-      unitPrice
+      unitPrice,
+      userId
     }: EntranceProps = req.body;
 
     const entranceObject: EntranceProps = {
@@ -24,7 +25,8 @@ export class EntranceController {
       supervisorName,
       addedAt: new Date(addedAt),
       quantity,
-      unitPrice
+      unitPrice,
+      userId
     }
     const entranceId = await this.service.create(entranceObject);
 
@@ -39,14 +41,15 @@ export class EntranceController {
 
   public async update(req: Request, res: Response): Promise<Response<number>> {
     const { id } = req.params
-    const {toolName, supervisorName, addedAt, quantity, unitPrice}: EntranceProps = req.body;
+    const {toolName, supervisorName, addedAt, quantity, unitPrice, userId}: EntranceProps = req.body;
 
     const entranceObject: EntranceProps = {
       toolName,
       supervisorName,
       addedAt: new Date(addedAt),
       quantity,
-      unitPrice
+      unitPrice,
+      userId
     }
     const entranceId = await this.service.update(+id, entranceObject);
 

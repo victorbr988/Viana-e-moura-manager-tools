@@ -20,7 +20,9 @@ export class ExitController {
       enterpriseName,
       quantity,
       account,
-      subAccount,}: ExitProps = req.body;
+      subAccount,
+      userId
+    }: ExitProps = req.body;
 
     const exitObject: ExitProps = {
       status,
@@ -32,6 +34,7 @@ export class ExitController {
       quantity,
       account,
       subAccount,
+      userId
     }
     const exitId = await this.service.create(exitObject);
 
@@ -56,6 +59,7 @@ export class ExitController {
       quantity,
       account,
       subAccount,
+      userId
     }: ExitProps = req.body;
 
     const exitObject: ExitProps = {
@@ -68,6 +72,7 @@ export class ExitController {
       quantity,
       account,
       subAccount,
+      userId
     }
 
     const exitId = await this.service.update(+id, exitObject);

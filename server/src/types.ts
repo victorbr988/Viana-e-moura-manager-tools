@@ -27,7 +27,8 @@ export interface EntranceProps {
   addedAt: Date,
   supervisorName: string,
   quantity: number,
-  unitPrice: number
+  unitPrice: number,
+  userId: string
 }
 
 export interface ExitProps {
@@ -40,7 +41,8 @@ export interface ExitProps {
   enterpriseName: string
   quantity: number,
   account: string,
-  subAccount: string
+  subAccount: string,
+  userId: string
 }
 
 export type PortProps = string | undefined;

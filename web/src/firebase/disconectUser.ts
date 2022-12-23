@@ -4,7 +4,7 @@ import { auth } from "./firebase-init";
 
 export async function disconect() {
   try {
-    signOut(auth)
+    await signOut(auth)
     toast.success('Usuário desconectado')
   } catch(error) {
     toast.error("Não foi possível desconectar-se")

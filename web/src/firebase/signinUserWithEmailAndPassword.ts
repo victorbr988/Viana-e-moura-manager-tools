@@ -3,7 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase-init";
 
 export async function siginUser(email: string, password: string) {
-  try {
+  try { 
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     window.location.href = '/home-app'
     return userCredential.user

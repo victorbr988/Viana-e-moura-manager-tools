@@ -1,4 +1,4 @@
 import { createContext } from "react"
-import { ContextProps } from "./Auth-provider"
+import { ContextProps } from "./types"
 
 export const AuthContext = createContext({} as ContextProps)

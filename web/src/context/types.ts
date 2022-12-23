@@ -1,6 +1,6 @@
 import { User, UserCredential } from "firebase/auth";
 
-export interface ProviderProps {
+export interface AuthProviderProps {
   children: React.ReactNode
 }
 

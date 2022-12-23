@@ -1,12 +1,12 @@
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, User } from "firebase/auth";
 import { siginUser } from "../firebase/signinUserWithEmailAndPassword";
-import { ProviderProps, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebase-init";
 import { AuthContext } from "./Context-provider";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { customErrors } from "../errors/customErrors";
 import { useNavigate } from "react-router-dom";
-import { ContextProps } from "./types";
+import { ContextProps, AuthProviderProps } from "./types";
 
 const provider = new GoogleAuthProvider();
 
@@ -18,7 +18,7 @@ function validateFields(email: string, password: string) {
   return true
 }
 
-export function AuthProvider({ children }: ProviderProps<ReactNode>) {
+export function AuthProvider({ children }: AuthProviderProps) {
   const [userLogged, setUserLogged] = useState<User | null>(null);
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
@@ -34,7 +34,7 @@ export function AuthProvider({ children }: ProviderProps<ReactNode>) {
     return onAuthStateChanged(auth, (user) => {
       setUserLogged(user)
     });
-  })
+  }, [])
 
   const contextType: ContextProps = {
     userLogged,
@@ -48,7 +48,6 @@ export function AuthProvider({ children }: ProviderProps<ReactNode>) {
     user,
     createAccountWithGoogle
   }
-  console.log({email, password})
 
   async function createUser() {
     try {
@@ -65,7 +64,6 @@ export function AuthProvider({ children }: ProviderProps<ReactNode>) {
         const userCredential = await createUserWithEmailAndPassword(email, password)
         return userCredential?.user
       }
-      navigate('home-app')
     } catch(err: any) {
       throw err
     }
@@ -73,11 +71,10 @@ export function AuthProvider({ children }: ProviderProps<ReactNode>) {
 
   async function createAccountWithGoogle() {
     try {
-      const userCredential = await signInWithPopup(auth, provider)
-      const credential = GoogleAuthProvider.credentialFromResult(userCredential);
-      const token = credential?.accessToken;
-      const user = userCredential.user;
-      console.log({user, token})
+      await signInWithPopup(auth, provider)
+      // const credential = GoogleAuthProvider.credentialFromResult(userCredential);
+      // const token = credential?.accessToken;
+      // const user = userCredential.user;
       navigate('home-app')
     } catch(err) {
       throw err

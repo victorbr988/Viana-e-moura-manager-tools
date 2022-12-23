@@ -11,7 +11,7 @@
     "build-storybook": "build-storybook",
     "up:container": "docker-compose up -d --build",
     "down:container": "docker-compose down",
-    "deploy:docker": "docker-compose up -d --build && npx prisma migrate deploy"
+    "deploy:docker": "docker-compose up -d --build && cd .. && cd server && npx prisma migrate deploy"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.0.1",

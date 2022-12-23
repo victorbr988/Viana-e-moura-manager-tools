@@ -3,7 +3,6 @@ import { Fragment, useContext } from "react"
 import { useLocation } from "react-router-dom"
 import { Unautorized } from "./components/DefaultComponent"
 import { Sidebar } from "./components/sidebar"
-import { AuthProvider } from "./context/Auth-provider"
 import { AuthContext } from "./context/Context-provider"
 import { Pagination } from "./Routes/Pagination"
 
@@ -24,9 +23,10 @@ function App() {
     )
   }
   return (
-    <AuthProvider>
+    <div className="flex">
       {RenderIfIsLogged()}
-    </AuthProvider>
+    </div>
+
   )
 }
 

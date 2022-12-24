@@ -54,4 +54,9 @@ const Modal = {
   Input: ModalInput
 }
 
-export { Modal }
+const inputGroup = {
+  Label: ModalLabel,
+  Input: ModalInput
+}
+
+export { Modal, inputGroup }

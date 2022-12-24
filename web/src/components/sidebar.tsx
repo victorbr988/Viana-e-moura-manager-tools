@@ -25,32 +25,32 @@ export function Sidebar() {
         </header>
         <main className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-                <CardNavigation route="/tools">
+                <CardNavigation route="/home-app/tools">
                   <FiSettings />
                   <span>Ferramentas</span>
                 </CardNavigation>
 
-                <CardNavigation route="/enterprises">
+                <CardNavigation route="/home-app/enterprises">
                   <FiGrid />
                   <span>Empreendimentos</span>
                 </CardNavigation>
 
-                <CardNavigation route="/supervisors">
+                <CardNavigation route="/home-app/supervisors">
                   <FiUsers />
                   <span>Supervisores</span>
                 </CardNavigation>
 
-                <CardNavigation route="entrance">
+                <CardNavigation route="/home-app/entrance">
                   <FiArrowUpCircle />
                   <span>Entradas</span>
                 </CardNavigation>
 
-                <CardNavigation route="exit">
+                <CardNavigation route="/home-app/exit">
                   <FiArrowDownCircle />
                   <span>Saídas</span>
                 </CardNavigation>
 
-                <CardNavigation route="dashboard">
+                <CardNavigation route="/home-app/dashboard">
                   <FiActivity />
                   <span>Dashboard</span>
                 </CardNavigation>

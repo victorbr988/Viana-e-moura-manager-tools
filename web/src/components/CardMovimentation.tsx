@@ -13,7 +13,7 @@ export interface EntranceProps {
 
 export interface ExitProps {
   id?: number;
-  status: string;
+  status?: string;
   requester: string;
   toolName: string;
   requestedAt: Date;
@@ -56,7 +56,7 @@ export function CardMovimentation({ variant, data, children }: CardMovimentation
         {
           variant === "entrance" && 
           (
-            <p className="text-sm text-slate-500">Adicionado por { data.supervisorName }</p>
+            <p className="text-sm text-slate-500">Autorizado por { data.supervisorName || '"Não identificado"' }</p>
           )
         }
 

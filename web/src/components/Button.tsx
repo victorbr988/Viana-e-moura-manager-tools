@@ -12,7 +12,7 @@ export function ButtonAdd({children, handleClick}: ButtonRootProps) {
     <button
       type="button"
       onClick={handleClick}
-      className="flex hover:bg-blue-600/90 transition-all gap-3 w-full justify-center text-sm rounded items-center p-2 text-white bg-blue-600">
+      className="flex hover:bg-blue-600/90 transition-all gap-2 w-full justify-center text-sm rounded items-center p-2 text-white bg-blue-600">
       {children}
     </button>
   )

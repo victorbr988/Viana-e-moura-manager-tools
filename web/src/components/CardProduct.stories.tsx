@@ -1,6 +1,5 @@
 import {Meta, StoryObj} from '@storybook/react';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
-import { randonColor } from '../utils/randonColor';
 import { CardProduct, CardProductProps } from './CardProduct';
 
 const mockData = {

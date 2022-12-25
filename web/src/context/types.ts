@@ -12,3 +12,8 @@ export interface ContextProps {
   user: UserCredential | undefined;
   createAccountWithGoogle(): Promise<void>;
 }
+
+export interface ToolProps {
+  id?: number,
+  name: string
+};

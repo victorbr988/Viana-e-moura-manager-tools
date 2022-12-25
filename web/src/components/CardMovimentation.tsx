@@ -56,7 +56,7 @@ export function CardMovimentation({ variant, data, children }: CardMovimentation
         {
           variant === "entrance" && 
           (
-            <p className="text-sm text-slate-500">Autorizado por { data.supervisorName || '"Não identificado"' }</p>
+            <p className="text-sm text-slate-500">{new Date(Date.now()).toLocaleDateString()}</p>
           )
         }
 

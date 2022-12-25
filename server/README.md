@@ -264,4 +264,4 @@
 ### Diagrama de entidades
 <hr/>
 
-<img src="/Users/victor/viana-e-moura-project/server/Diagrama_entidade.png" />
+<img src="https://github.com/victorbr988/Viana-e-moura-manager-tools/blob/d4380837b9a9b6e3853e41c33d7c34dd99cb2600/server/Diagrama_entidade.png" />

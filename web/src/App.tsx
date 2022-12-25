@@ -1,9 +1,10 @@
 import { User } from "firebase/auth"
-import { Fragment, useContext } from "react"
+import { useContext } from "react"
 import { useLocation } from "react-router-dom"
 import { Unautorized } from "./components/DefaultComponent"
 import { Sidebar } from "./components/sidebar"
 import { AuthContext } from "./context/Context-provider"
+import { DatabaseProvider } from "./context/Database-provider"
 import { Pagination } from "./Routes/Pagination"
 
 function App() {
@@ -16,17 +17,16 @@ function App() {
       return <Unautorized /> 
     }
     return (
-      <Fragment>
+      <DatabaseProvider>
         {router.pathname !== "/" && userCredential !== null && (<Sidebar />)}
         <Pagination />
-      </Fragment>
+      </DatabaseProvider>
     )
   }
   return (
     <div className="flex">
       {RenderIfIsLogged()}
     </div>
-
   )
 }
 

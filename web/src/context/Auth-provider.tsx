@@ -36,7 +36,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   async function createUser(email: string, password: string) {
-    console.log({email, password})
     try {
       const userExist = await siginUser(email, password)
   

@@ -1,4 +1,6 @@
+import { AxiosError } from "axios";
 import { ReactNode, useEffect, useState } from "react"
+import { toast } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 import { create, deleteData, getData } from "../axios/requesters";
 import { DatabaseContext } from "./Context-provider"
@@ -26,11 +28,19 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function createTool(name: string) {
+    const toastId = toast.loading("Criando ferramenta...", {
+      duration: 2000
+    })
     try {
       await create('/tools', { name })
+      toast.success("Ferramenta criada com sucesso", {
+        duration: 3000
+      })
+      toast.dismiss(toastId)
       await getTools()
-    } catch(err: any) {
-      console.dir(err)
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
     }
   }
 
@@ -39,7 +49,8 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
       const tools = await getData('/tools')
       setTools(tools.data.sort())
       return tools
-    } catch(err: any) {
+    } catch(err: AxiosError | any) {
+      toast.error(err)
       console.log(err)
     }
   }
@@ -55,9 +66,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   useEffect(() => {
-    if (location.pathname !== "/") {
-      getTools()
-    }
+    getTools()
   }, [])
 
   return (

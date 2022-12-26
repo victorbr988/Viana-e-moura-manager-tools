@@ -9,7 +9,7 @@ on:
 # Ações para o deploy
 jobs:
   deploy:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
     steps:
       - name: "checkout do projeto"
         uses: actions/checkout@v3

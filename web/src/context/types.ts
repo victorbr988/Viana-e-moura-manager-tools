@@ -17,3 +17,5 @@ export interface ToolProps {
   id?: number,
   name: string
 };
+
+export interface EnterpriseProps extends ToolProps {}

@@ -1,5 +1,4 @@
 import { AxiosError, AxiosResponse } from "axios"
-import { toast } from "react-hot-toast"
 import { ToolProps } from "../context/types"
 import { instance } from "./axios-config"
 
@@ -22,7 +21,7 @@ export async function getData(url: string): Promise<AxiosResponse<ToolProps[]>> 
   try {
     const tools = await instance.get(url)
     return tools
-  } catch(err: any) {
+  } catch(err: AxiosError | any) {
     if (err instanceof AxiosError) {
       throw err.response?.data.message
     }
@@ -32,19 +31,23 @@ export async function getData(url: string): Promise<AxiosResponse<ToolProps[]>> 
 
 export async function deleteData(url: string) {
   try {
-    const createPromise = instance.delete(url)
-    toast.promise(createPromise,
-      {
-        success: "Excluído com sucesso",
-        loading: "Verificando na base dados...",
-        error: "Não foi possível excluir da base de dados"
-      }
-    )
-
-    await createPromise
-  } catch(err) {
+    await instance.delete(url)
+  } catch(err: AxiosError | any) {
     if (err instanceof AxiosError) {
       console.dir(err)
+      return err.response?.data.message
+    }
+    throw err
+  }
+}
+
+export async function update(url: string, data: Record<string, string | number>) {
+  try {
+    await instance.put(url, { ...data })
+  } catch(err: AxiosError | any) {
+    if (err instanceof AxiosError) {
+      console.dir(err)
+      return err.response?.data.message
     }
     throw err
   }

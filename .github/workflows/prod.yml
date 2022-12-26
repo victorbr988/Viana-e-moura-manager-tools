@@ -27,7 +27,7 @@ jobs:
         working-directory: "./web"
         run: npm run build
 
-      - name: "deploy para netflify"
+      - name: "deploy para netlify"
         working-directory: "./web"
         uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:

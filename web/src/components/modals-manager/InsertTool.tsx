@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { useContext, useState } from "react";
-import { toast } from "react-hot-toast";
 import { FiSave, FiTool } from "react-icons/fi";
 import { DatabaseContext } from "../../context/Context-provider";
 import { ContextDatabaseProps } from "../../context/Database-provider";
@@ -23,7 +22,7 @@ export function ModalTools({ isOpen, setIsOpen }: ModalToolsProps) {
 
   function handleClick() {
     contextState.createTool(tool)
-    setTool("")
+    // setTool("")
     setIsOpen(!isOpen)
   }
 

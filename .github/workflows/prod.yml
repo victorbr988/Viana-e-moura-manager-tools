@@ -29,8 +29,8 @@ jobs:
 
       - name: "deploy para netlify"
         uses: jsmrcaga/action-netlify-deploy@v1.1.0
+        working-directory: "./web"
         with:
-          # build_directory: "../../web/dist"
           NETLIFY_AUTH_TOKEN: ${{ secrets.GH_NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: 3798b31c-39fb-416a-950f-e5778e5a3007
           NETLIFY_DEPLOY_TO_PROD: true

@@ -23,7 +23,7 @@ export function ModalUpdateTool({ isOpen, setIsOpen, toolId }: ModalToolsProps) 
 
   function handleClick() {
     contextState.updateTool({id: toolId, name: tool})
-    setTool("")
+    // setTool("")
     setIsOpen(!isOpen)
   }
 

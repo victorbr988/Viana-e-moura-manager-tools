@@ -28,6 +28,7 @@ jobs:
         run: npm run build
 
       - name: "deploy para netflify"
+        working-directory: "./web"
         uses: jsmrcaga/action-netlify-deploy@v1.1.0
         with:
           NETLIFY_AUTH_TOKEN: ${{ secrets.GH_NETLIFY_AUTH_TOKEN }}

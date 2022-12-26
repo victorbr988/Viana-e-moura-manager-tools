@@ -32,6 +32,6 @@ jobs:
         with:
           build_directory: "./web/dist"
           NETLIFY_AUTH_TOKEN: ${{ secrets.GH_NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: 3798b31c-39fb-416a-950f-e5778e5a3007
+          NETLIFY_SITE_ID: bf715853-b099-42b4-a92a-b84d37b83905
           NETLIFY_DEPLOY_TO_PROD: true
     

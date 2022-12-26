@@ -20,6 +20,7 @@ jobs:
           node-version: 14
 
       - name: "instalando libs"
+        working-directory: "./web"
         run: npm install
 
       - name: "build do projeto"

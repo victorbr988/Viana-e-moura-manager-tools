@@ -23,6 +23,7 @@ jobs:
         run: npm install
 
       - name: "build do projeto"
+        working-directory: "./web"
         run: npm run build
 
       - name: "deploy para netflify"

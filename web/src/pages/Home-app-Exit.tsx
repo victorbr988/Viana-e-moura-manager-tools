@@ -6,20 +6,7 @@ import { NoData } from "../components/DefaultComponent";
 import { inputGroup } from "../components/Modal";
 
 export function HomeAppExit() {
-  const mockData: any[] = [
-    {
-      id: 3,
-      status: "Pendente",
-      requester: "Victor",
-      toolName: "Broca",
-      requestedAt: new Date(Date.now()),
-      responseAt: new Date(Date.now() + 1),
-      enterpriseName: "Xique-xique etapa(3)",
-      quantity: 4,
-      account: "Acc",
-      subAccount: "Acv"
-    }
-  ]
+  const mockData: any[] = []
 
   return (
     <section className="p-20 w-full flex flex-col gap-10">

@@ -9,34 +9,7 @@ import { AuthContext } from "../context/Context-provider";
 export function HomeAppEntrances() {
   const contextState = useContext(AuthContext)
   const userCredential = contextState.userLogged 
-  const mockData: any[] = [
-    {
-      id: 3,
-      requester: "Victor",
-      supervisorName: "Regyhana",
-      toolName: "Broca",
-      requestedAt: new Date(Date.now()),
-      responseAt: new Date(Date.now() + 1),
-      enterpriseName: "Xique-xique etapa(3)",
-      quantity: 4,
-      account: "Acc",
-      subAccount: "Acv",
-      userId: "gabrielvghs666@gmail.com"
-    },
-    {
-      id: 3,
-      requester: "Victor",
-      toolName: "Parafusadeira",
-      supervisorName: "Regyhana",
-      requestedAt: new Date(Date.now()),
-      responseAt: new Date(Date.now() + 1),
-      enterpriseName: "Xique-xique etapa(3)",
-      quantity: 4,
-      account: "Acc",
-      subAccount: "Acv",
-      userId: "victorbrsalvatore@gmail.com"
-    }
-  ]
+  const mockData: any[] = []
 
   const dataByUserId = mockData.filter(data => data.userId === userCredential?.email)
 

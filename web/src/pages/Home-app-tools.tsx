@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { FiEdit, FiPlus, FiSearch, FiTrash2 } from "react-icons/fi";
 import { ButtonAdd } from "../components/Button";
 import { CardProduct } from "../components/CardProduct";
@@ -27,6 +27,10 @@ export function HomeAppTools() {
   function handleSearch({ target }: any) {
     setSearchTool(target.value)
   }
+
+  useEffect(() => {
+    contextState.getTools()
+  }, [])
 
   function renderCards() {
     const iterableData: ToolProps[] = filteredByNameTool.length <= 0 ? contextState.tools : filteredByNameTool

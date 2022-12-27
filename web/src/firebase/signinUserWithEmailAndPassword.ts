@@ -5,13 +5,15 @@ import { auth } from "./firebase-init";
 export async function siginUser(email: string, password: string) {
   try { 
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
-    window.location.href = '/home-app'
+
     return userCredential.user
   } catch(err: unknown) {
-    console.dir(err)
+
     if(err instanceof FirebaseError) {
       return err.code
     }
+
+    console.dir(err)
     throw err
   }
 } 

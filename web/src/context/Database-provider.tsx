@@ -19,6 +19,7 @@ export interface ContextDatabaseProps {
   createEnterprise(value: string): void;
   deleteEnterprise(id: number): void;
   updateEnterprise(data: Record<string, string | number>): void;
+  getTools(): void
 
 }
 
@@ -34,7 +35,8 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     createEnterprise,
     deleteEnterprise,
     updateEnterprise,
-    enterprises
+    enterprises,
+    getTools
   }
 
   const location = useLocation()

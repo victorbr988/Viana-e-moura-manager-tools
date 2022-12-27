@@ -17,7 +17,7 @@ export function HomeLogin() {
     if (!regex.test(email)) return toast.error('Email inválido')
     try {
       toast.loading("Validando dados")
-      await contextState.createUser(email, password)
+      await contextState.accessUserInApp(email, password)
       toast.dismiss()
 
       setEmail('')

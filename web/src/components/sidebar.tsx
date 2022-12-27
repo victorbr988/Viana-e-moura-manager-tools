@@ -40,32 +40,32 @@ export function Sidebar() {
         </header>
         <main className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-                <CardNavigation route="/home-app/tools">
+                <CardNavigation closeSidebar={modalVisible} route="/home-app/tools">
                   <FiSettings />
                   <span>Ferramentas</span>
                 </CardNavigation>
 
-                <CardNavigation route="/home-app/enterprises">
+                <CardNavigation closeSidebar={modalVisible} route="/home-app/enterprises">
                   <FiGrid />
                   <span>Empreendimentos</span>
                 </CardNavigation>
 
-                <CardNavigation route="/home-app/supervisors">
+                <CardNavigation closeSidebar={modalVisible} route="/home-app/supervisors">
                   <FiUsers />
                   <span>Supervisores</span>
                 </CardNavigation>
 
-                <CardNavigation route="/home-app/entrance">
+                <CardNavigation closeSidebar={modalVisible} route="/home-app/entrance">
                   <FiArrowUpCircle />
                   <span>Entradas</span>
                 </CardNavigation>
 
-                <CardNavigation route="/home-app/exit">
+                <CardNavigation closeSidebar={modalVisible} route="/home-app/exit">
                   <FiArrowDownCircle />
                   <span>Saídas</span>
                 </CardNavigation>
 
-                <CardNavigation route="/home-app/dashboard">
+                <CardNavigation closeSidebar={modalVisible} route="/home-app/dashboard">
                   <FiActivity />
                   <span>Dashboard</span>
                 </CardNavigation>

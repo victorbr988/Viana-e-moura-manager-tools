@@ -29,29 +29,45 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const contextType: ContextProps = {
     userLogged,
     setUserLogged,
-    createUser,
+    accessUserInApp,
     loading,
     user,
     createAccountWithGoogle
   }
 
   async function createUser(email: string, password: string) {
+    const userCredential = await createUserWithEmailAndPassword(email, password)
+    navigate("/home-app")
+    return userCredential?.user
+  }
+
+  async function managerErrorsAccess(userType: string | User, email: string, password: string) {
+    if (userType === customErrors.WRONG_PASSWORD) {
+      throw new Error("Senha não confere")
+    }
+
+    if (typeof userType !== 'string') {
+      return navigate("/home-app")
+    }
+
+    if (userType === customErrors.INVALID_EMAIL) {
+      throw new Error("Email no formato inválido")
+    }
+
+    if (userType === customErrors.NOT_FOUND) {
+      try{
+        await createUser(email, password)
+      } catch(err: unknown) {
+        throw err
+      }
+    }
+  }
+
+  async function accessUserInApp(email: string, password: string) {
     try {
       const userExist = await siginUser(email, password)
-  
-      if (userExist === customErrors.WRONG_PASSWORD) {
-        throw new Error("Senha não confere")
-      }
-  
-      if (userExist === customErrors.NOT_FOUND) {
-        const userCredential = await createUserWithEmailAndPassword(email, password)
-        navigate("/home-app")
-        return userCredential?.user
-      }
+      await managerErrorsAccess(userExist, email, password)
 
-      if (userExist === customErrors.INVALID_EMAIL) {
-        throw new Error("Email no formato inválido")
-      }
     } catch(err: any) {
       throw err
     }

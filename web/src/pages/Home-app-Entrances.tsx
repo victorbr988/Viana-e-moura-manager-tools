@@ -14,7 +14,7 @@ export function HomeAppEntrances() {
   const dataByUserId = mockData.filter(data => data.userId === userCredential?.email)
 
   return (
-    <section className="p-20 w-full flex flex-col gap-10">
+    <section className="md:p-20 w-full py-20 px-5 flex flex-col gap-10">
       <header>
         <h1 className="text-center text-2xl font-semibold">Entrada de ferramentas</h1>
       </header>

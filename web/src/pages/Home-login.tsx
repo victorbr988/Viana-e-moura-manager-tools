@@ -31,7 +31,7 @@ export function HomeLogin() {
 
   return (
     <Fragment>
-      <main className="flex min-h-screen w-full justify-center items-center">
+      <main className="flex min-h-screen relative w-full justify-center items-center">
         <section className="w-1/2 hidden lg:visible lg:flex justify-center items-center border-r-[1px] border-gray-900">
           <img className="w-[350px] rounded-xl" src={phonePreview} alt="Imagem de um celular com uma página aberta" />
         </section>
@@ -58,8 +58,8 @@ export function HomeLogin() {
             </Modal.Content>
           </Modal.Root>
         </section>
+        <Footer />
       </main>
-      <Footer />
     </Fragment>
   )
 }

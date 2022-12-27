@@ -9,7 +9,7 @@ export function HomeAppExit() {
   const mockData: any[] = []
 
   return (
-    <section className="p-20 w-full flex flex-col gap-10">
+    <section className="md:p-20 w-full py-20 px-5 flex flex-col gap-10">
       <header>
         <h1 className="text-center text-2xl font-semibold">Saída de ferramentas</h1>
       </header>

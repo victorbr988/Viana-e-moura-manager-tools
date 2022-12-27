@@ -1,5 +1,5 @@
 import { User } from "firebase/auth"
-import { useContext } from "react"
+import { Fragment, useContext } from "react"
 import { useLocation } from "react-router-dom"
 import { Unautorized } from "./components/DefaultComponent"
 import { Sidebar } from "./components/sidebar"
@@ -18,8 +18,10 @@ function App() {
     }
     return (
       <DatabaseProvider>
-        {router.pathname !== "/" && userCredential !== null && (<Sidebar />)}
-        <Pagination />
+        <Fragment>
+          {router.pathname !== "/" && userCredential !== null && (<Sidebar />)}
+          <Pagination />
+        </Fragment>
       </DatabaseProvider>
     )
   }

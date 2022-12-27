@@ -54,7 +54,7 @@ export function HomeAppTools() {
 
   return (
     <section className="relative w-full flex flex-col">
-      <div className="p-20 flex flex-col gap-10">
+      <div className="md:p-20 w-full py-20 px-5 flex flex-col gap-10">
         <header>
           <h1 className="text-center text-2xl font-semibold">Ferramentas de infraestrutura</h1>
         </header>

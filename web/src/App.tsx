@@ -13,9 +13,9 @@ function App() {
   const router = useLocation()
 
   function RenderIfIsLogged() {
-    if (router.pathname !== "/" && !userCredential) {
-      return <Unautorized /> 
-    }
+    // if (router.pathname !== "/" && !userCredential) {
+    //   return <Unautorized /> 
+    // }
     return (
       <DatabaseProvider>
         <Fragment>

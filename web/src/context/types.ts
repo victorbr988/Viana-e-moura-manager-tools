@@ -7,7 +7,7 @@ export interface AuthProviderProps {
 export interface ContextProps {
   userLogged: User | null;
   setUserLogged: React.Dispatch<React.SetStateAction<User | null>>;
-  createUser: (email: string, password: string) => Promise<User | undefined>;
+  accessUserInApp: (email: string, password: string) => Promise<void>;
   loading: boolean;
   user: UserCredential | undefined;
   createAccountWithGoogle(): Promise<void>;

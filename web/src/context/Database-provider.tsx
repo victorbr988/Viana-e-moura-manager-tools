@@ -65,16 +65,13 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function createTool(name: string) {
-    const toastId = toast.loading("Criando ferramenta...", {
-      duration: 2000
-    })
+    const toastId = toast.loading("Criando ferramenta...")
     try {
       await create('/tools', { name })
-      toast.success("Ferramenta criada com sucesso", {
-        duration: 3000
-      })
-      toast.dismiss(toastId)
       await getTools()
+
+      toast.dismiss(toastId)
+      toast.success("Ferramenta criada com sucesso") 
     } catch(err: AxiosError | any) {
       toast.dismiss(toastId)
       toast.error(err)
@@ -82,14 +79,13 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function deleteTool(id: number) {
-    const toastId = toast.loading("Verificando ferramenta...", {
-      duration: 2000
-    })
+    const toastId = toast.loading("Verificando ferramenta...")
     try {
       await deleteData(`/tools/${id}`)
-      toast.success("Excluído com sucesso")
       await getTools()
+
       toast.dismiss(toastId)
+      toast.success("Excluído com sucesso")
     } catch(err: AxiosError | any) {
       toast.dismiss(toastId)
       toast.error(err)
@@ -98,9 +94,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function updateTool(data: Record<string, string | number>) {
-    const toastId = toast.loading("Editando ferramenta...", {
-      duration: 2000
-    })
+    const toastId = toast.loading("Editando ferramenta...")
     try {
       await update(`/tools/${data.id}`, data)
       await getTools()
@@ -126,16 +120,13 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function createEnterprise(name: string) {
-    const toastId = toast.loading("Criando empreendimento...", {
-      duration: 2000
-    })
+    const toastId = toast.loading("Criando empreendimento...")
     try {
       await create('/enterprises', { name })
-      toast.success("Empreendimento criado com sucesso", {
-        duration: 3000
-      })
-      toast.dismiss(toastId)
       await getEnterprises()
+
+      toast.dismiss(toastId)
+      toast.success("Empreendimento criado com sucesso")
     } catch(err: AxiosError | any) {
       toast.dismiss(toastId)
       toast.error(err)
@@ -143,14 +134,13 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function deleteEnterprise(id: number) {
-    const toastId = toast.loading("Verificando empreendimento...", {
-      duration: 2000
-    })
+    const toastId = toast.loading("Verificando empreendimento...")
     try {
       await deleteData(`/enterprises/${id}`)
-      toast.success("Excluído com sucesso")
       await getEnterprises()
+
       toast.dismiss(toastId)
+      toast.success("Excluído com sucesso")
     } catch(err: AxiosError | any) {
       toast.dismiss(toastId)
       toast.error(err)
@@ -159,12 +149,68 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function updateEnterprise(data: Record<string, string | number>) {
+    const toastId = toast.loading("Editando empreendimento...")
+    try {
+      await update(`/enterprises/${data.id}`, data)
+      await getEnterprises()
+
+      toast.dismiss(toastId)
+      toast.success("Editado com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+      throw err
+    }
+  }
+
+  // CRUD supervisores
+  async function getSupervisors() {
+    try {
+      const enterprises = await getData('/enterprises')
+      setEnterprises(enterprises.data.sort())
+      return enterprises
+    } catch(err: AxiosError | any) {
+      toast.error(err)
+      console.log(err)
+    }
+  }
+
+  async function createSupervisor(data: Record<string, string>) {
+    const toastId = toast.loading("Criando supervisor...")
+    try {
+      await create('/supervisors', data)
+      await getSupervisors()
+
+      toast.dismiss(toastId)
+      toast.success("Empreendimento criado com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+    }
+  }
+
+  async function deleteSupervisor(id: number) {
+    const toastId = toast.loading("Verificando empreendimento...")
+    try {
+      await deleteData(`/supervisors/${id}`)
+      await getSupervisors()
+
+      toast.dismiss(toastId)
+      toast.success("Excluído com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+      throw err
+    }
+  }
+
+  async function updateSupervisor(data: Record<string, string | number>) {
     const toastId = toast.loading("Editando empreendimento...", {
       duration: 2000
     })
     try {
-      await update(`/enterprises/${data.id}`, data)
-      await getEnterprises()
+      await update(`/supervisors/${data.id}`, data)
+      await getSupervisors()
 
       toast.dismiss(toastId)
       toast.success("Editado com sucesso")

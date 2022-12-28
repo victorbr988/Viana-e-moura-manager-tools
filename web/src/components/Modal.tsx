@@ -32,7 +32,7 @@ function ModalContent({children}: ModalContentProps) {
 
 function ModalLabel({children}: ModalLabelProps) {
   return (
-    <label className="flex gap-2 focus-within:border-[#0066FF] border-2 border-gray-200 rounded items-center w-full p-2">
+    <label className="flex gap-2 focus-within:border-[#0066FF] border-2 border-gray-300 rounded items-center w-full p-2">
       {children}
     </label>
   )

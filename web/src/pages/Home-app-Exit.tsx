@@ -22,7 +22,7 @@ export function HomeAppExit() {
         <section>
           <ButtonAdd >
             <FiPlus />
-            Adicionar
+            <span className="px-1">Adicionar</span>
           </ButtonAdd>
         </section>
       </section>

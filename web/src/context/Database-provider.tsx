@@ -3,8 +3,9 @@ import { ReactNode, useEffect, useState } from "react"
 import { toast } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
 import { create, deleteData, getData, update } from "../axios/requesters";
+import { orderArray } from "../utils/orderArrayList";
 import { DatabaseContext } from "./Context-provider"
-import { EnterpriseProps, ToolProps } from "./types";
+import { EnterpriseProps, SupervisorProps, ToolProps } from "./types";
 
 interface DatabaseProviderProps {
   children: ReactNode
@@ -15,17 +16,22 @@ export interface ContextDatabaseProps {
   createTool(value: string): void;
   deleteTool(id: number): void;
   updateTool(data: Record<string, string | number>): void;
+  getTools(): void
   enterprises: EnterpriseProps[]
   createEnterprise(value: string): void;
   deleteEnterprise(id: number): void;
   updateEnterprise(data: Record<string, string | number>): void;
-  getTools(): void
-
+  supervisors: SupervisorProps[]
+  createSupervisor(data: Record<string, string | number>): void;
+  deleteSupervisor(id: number): void;
+  updateSupervisor(data: Record<string, string | number>): void;
+  getSupervisors(): void
 }
 
 export function DatabaseProvider({ children }: DatabaseProviderProps) {
   const [tools, setTools] = useState<ToolProps[]>([])
   const [enterprises, setEnterprises] = useState<EnterpriseProps[]>([])
+  const [supervisors, setSupervisors] = useState<SupervisorProps[]>([])
 
   const contextType: ContextDatabaseProps = {
     tools,
@@ -36,7 +42,12 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     deleteEnterprise,
     updateEnterprise,
     enterprises,
-    getTools
+    getTools,
+    createSupervisor,
+    deleteSupervisor,
+    supervisors,
+    updateSupervisor,
+    getSupervisors
   }
 
   const location = useLocation()
@@ -56,7 +67,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   async function getTools() {
     try {
       const tools = await getData('/tools')
-      setTools(tools.data.sort())
+      setTools(orderArray<ToolProps>(tools.data))
       return tools
     } catch(err: AxiosError | any) {
       toast.error(err)
@@ -111,7 +122,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   async function getEnterprises() {
     try {
       const enterprises = await getData('/enterprises')
-      setEnterprises(enterprises.data.sort())
+      setEnterprises(orderArray<EnterpriseProps>(enterprises.data))
       return enterprises
     } catch(err: AxiosError | any) {
       toast.error(err)
@@ -166,9 +177,10 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   // CRUD supervisores
   async function getSupervisors() {
     try {
-      const enterprises = await getData('/enterprises')
-      setEnterprises(enterprises.data.sort())
-      return enterprises
+      const supervisors = await getData('/supervisors')
+      console.log(supervisors)
+      setSupervisors(orderArray<SupervisorProps>(supervisors.data))
+      return supervisors
     } catch(err: AxiosError | any) {
       toast.error(err)
       console.log(err)
@@ -182,7 +194,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
       await getSupervisors()
 
       toast.dismiss(toastId)
-      toast.success("Empreendimento criado com sucesso")
+      toast.success("supervisor criado com sucesso")
     } catch(err: AxiosError | any) {
       toast.dismiss(toastId)
       toast.error(err)
@@ -190,7 +202,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function deleteSupervisor(id: number) {
-    const toastId = toast.loading("Verificando empreendimento...")
+    const toastId = toast.loading("Verificando supervisor...")
     try {
       await deleteData(`/supervisors/${id}`)
       await getSupervisors()
@@ -205,7 +217,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function updateSupervisor(data: Record<string, string | number>) {
-    const toastId = toast.loading("Editando empreendimento...", {
+    const toastId = toast.loading("Editando supervisor...", {
       duration: 2000
     })
     try {

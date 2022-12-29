@@ -18,4 +18,10 @@ export interface ToolProps {
   name: string
 };
 
+export interface SupervisorProps {
+  id?: number,
+  name: string,
+  sector: string
+};
+
 export interface EnterpriseProps extends ToolProps {}

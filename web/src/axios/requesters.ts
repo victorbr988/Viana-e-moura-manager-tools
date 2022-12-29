@@ -1,10 +1,9 @@
 import { AxiosError, AxiosResponse } from "axios"
-import { ToolProps } from "../context/types"
 import { instance } from "./axios-config"
 
-export async function create(url: string, data: Record<string, string>): Promise<AxiosResponse<AxiosError | ToolProps[]>> {
+export async function create(url: string, data: Record<string, string>): Promise<AxiosResponse<AxiosError | any>> {
   try {
-    const createResponse = await instance.post<ToolProps[]>(
+    const createResponse = await instance.post(
       url,
       data
     )
@@ -17,7 +16,7 @@ export async function create(url: string, data: Record<string, string>): Promise
   }
 }
 
-export async function getData(url: string): Promise<AxiosResponse<ToolProps[]>> {
+export async function getData(url: string): Promise<AxiosResponse> {
   try {
     const tools = await instance.get(url)
     return tools

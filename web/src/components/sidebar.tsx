@@ -28,10 +28,10 @@ export function Sidebar() {
   return (
     <Fragment>
       <FiMenu className={clsx("text-3xl absolute left-6 z-50", {
-        "hidden": width > 500
+        "hidden": width > 700
       })} onClick={modalVisible} />
       <aside className={clsx("flex flex-col w-64 min-h-screen px-4 py-8 bg-white border-r", {
-        "absolute z-40": width <= 500,
+        "absolute z-40": width <= 700,
         "hidden": isOpenNavigation === false && width <= 500
       })}>
         <header className="flex flex-col pt-3 gap-2">

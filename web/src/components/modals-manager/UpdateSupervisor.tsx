@@ -43,7 +43,7 @@ export function ModalUpdateSupervisor({ isOpen, setIsOpen, supervisorId }: Modal
     <div className={clsx("absolute justify-center items-center flex w-full h-full flex-1 bg-black/50", {
       "hidden": isOpen === false
     })}>
-      <Modal.Root title="Adicionar uma ferramenta">
+      <Modal.Root title="Editar um supervisor">
         <Modal.Content>
           <h1 className="text-gray-600 font-medium">Identificador do empreendimento: {supervisorId}</h1>
           <Modal.Label>

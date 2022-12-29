@@ -12,7 +12,7 @@ export function Sidebar() {
   const contextState = useContext(AuthContext)
   const userCredential: User | null = contextState.userLogged
   const navigate = useNavigate()
-  const [isOpenNavigation, setIsOpenNavigation] = useState<boolean>(true)
+  const [isOpenNavigation, setIsOpenNavigation] = useState<boolean>(false)
   const { width } = useWindowDimensions();
   console.log(width)
 
@@ -32,7 +32,7 @@ export function Sidebar() {
       })} onClick={modalVisible} />
       <aside className={clsx("flex flex-col w-64 min-h-screen px-4 py-8 bg-white border-r", {
         "absolute z-40": width <= 700,
-        "hidden": isOpenNavigation === false && width <= 500
+        "hidden": isOpenNavigation === false && width <= 700
       })}>
         <header className="flex flex-col pt-3 gap-2">
           <h2 className="text-3xl font-semibold text-center text-gray-800">Viana & Moura</h2>

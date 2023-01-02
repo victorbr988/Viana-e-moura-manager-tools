@@ -1,10 +1,10 @@
 import { useContext, Fragment, useState } from "react";
-import { FiActivity, FiArrowDownCircle, FiArrowUpCircle, FiGrid, FiLogOut, FiMenu, FiSettings, FiUsers, FiX } from "react-icons/fi";
+import { FiActivity, FiArrowDownCircle, FiArrowUpCircle, FiGrid, FiLogOut, FiMenu, FiSettings, FiUsers } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { CardNavigation } from "./CardNavigation";
 import { AuthContext } from "../context/Context-provider"
 import { User } from "firebase/auth";
-import {disconect} from "../firebase/disconectUser"
+import { disconect } from "../firebase/disconectUser"
 import clsx from "clsx";
 import useWindowDimensions from "../utils/hooks";
 
@@ -14,7 +14,6 @@ export function Sidebar() {
   const navigate = useNavigate()
   const [isOpenNavigation, setIsOpenNavigation] = useState<boolean>(false)
   const { width } = useWindowDimensions();
-  console.log(width)
 
   async function handleClick() {
     await disconect()

@@ -4,13 +4,18 @@ import { FiDivide, FiDollarSign, FiSave } from "react-icons/fi";
 import Select from "react-select";
 import { AuthContext, DatabaseContext } from "../../context/Context-provider";
 import { ContextDatabaseProps } from "../../context/Database-provider";
-import { ContextProps, ToolProps, EntranceProps } from "../../context/types";
+import { ContextProps, SupervisorProps, ToolProps } from "../../context/types";
 import { ButtonAdd } from "../Button";
 import { Modal } from "../Modal";
 
 interface ModalProps {
   isOpen: boolean;
   setIsOpen(value: boolean): void
+}
+
+interface OptionsProps {
+  value: string,
+  label: string
 }
 
 export function ModalInsertEntrance({ isOpen, setIsOpen }: ModalProps) {
@@ -23,8 +28,16 @@ export function ModalInsertEntrance({ isOpen, setIsOpen }: ModalProps) {
   const [quantity, setQuantity] = useState<number>(0)
   const [price, setPrice] = useState<number>(0)
 
-  const optionsTools: any[] = [{ value: "Ferramenta", label: "Ferramenta"}] 
-  const optionsSupervisors: any[] = [{ value: "Supervisor", label: "Supervisor"}] 
+  useEffect(() => {
+    contextState.getTools()
+  }, [])
+
+  useEffect(() => {
+    contextState.getSupervisors()
+  }, [])
+
+  const optionsTools: OptionsProps[] = [{ value: "Ferramenta", label: "Ferramenta"}] 
+  const optionsSupervisors: OptionsProps[] = [{ value: "Supervisor", label: "Supervisor"}] 
 
   contextState.tools.forEach((tool: ToolProps) => {
     optionsTools.push({
@@ -33,10 +46,10 @@ export function ModalInsertEntrance({ isOpen, setIsOpen }: ModalProps) {
     })
   })
 
-  contextState.supervisors.forEach((tool: ToolProps) => {
+  contextState.supervisors.forEach((supervisor: SupervisorProps) => {
     optionsSupervisors.push({
-      value: tool.name,
-      label: tool.name
+      value: supervisor.name,
+      label: supervisor.name
     })
   })
   
@@ -45,12 +58,12 @@ export function ModalInsertEntrance({ isOpen, setIsOpen }: ModalProps) {
     setSupervisor(option.value)
   }
 
-  function updateDate({ target }: any) {
-    setDate(target.value)
-  }
-
   function updateTool(option: any) {
     setTool(option.value)
+  }
+
+  function updateDate({ target }: any) {
+    setDate(target.value)
   }
 
   function updateQuantity({ target }: any) {
@@ -73,13 +86,6 @@ export function ModalInsertEntrance({ isOpen, setIsOpen }: ModalProps) {
     contextState.createEntrance(body)
     setIsOpen(!isOpen)
   }
-  useEffect(() => {
-    contextState.getTools()
-  }, [])
-
-  useEffect(() => {
-    contextState.getSupervisors()
-  }, [])
 
   return (
     <div className={clsx("absolute justify-center items-center flex w-full h-full flex-1 bg-black/50", {

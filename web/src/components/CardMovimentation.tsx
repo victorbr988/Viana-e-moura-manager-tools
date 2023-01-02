@@ -1,16 +1,8 @@
 import clsx from "clsx";
 import { ReactNode } from "react"
 import { NavLink, useLocation } from "react-router-dom"
+import { EntranceProps } from "../context/types";
 import { dateFormat } from "../utils/dateFormat";
-
-export interface EntranceProps {
-  id?: number;
-  toolName: string;
-  addedAt: Date;
-  supervisorName: string;
-  quantity: number;
-  unitPrice: number
-};
 
 export interface ExitProps {
   id?: number;

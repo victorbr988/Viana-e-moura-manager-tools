@@ -31,7 +31,6 @@ export function HomeAppSupervisors() {
   useEffect(() => {
     contextState.getSupervisors()
   }, [])
-  console.log(contextState.supervisors)
 
   function renderCards() {
     const iterableData: SupervisorProps[] = filteredByNameSupervisor.length <= 0 ? contextState.supervisors : filteredByNameSupervisor

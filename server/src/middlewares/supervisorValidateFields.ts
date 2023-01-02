@@ -6,13 +6,6 @@ export async function supervisorValidation(request: Request, response: Response,
   const { name, sector }: SupervisorProps = request.body;
   const MIN_LENGTH_FIELD = 3;
 
-  const prisma = new PrismaClient()
-  const findSupervisorWithName = await prisma.supervisors.findUnique({
-    where: { name }
-  })
-
-  if(findSupervisorWithName) return response.status(StatusCode.INVALID_DATA).json({message: "Supervisor já cadastrado"})
-
   if (!name) {
     return response.status(StatusCode.NOT_FOUND).json({ message: "É obrigatório preencher o nome"});
   };

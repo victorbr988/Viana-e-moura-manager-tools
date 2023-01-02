@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express"
 import { CreateSupervisorService } from "../services/SupervisorsService";
 import { SupervisorProps, ToolProps } from "../types";
@@ -12,6 +13,12 @@ export class SupervisorsController {
 
   public async create(req: Request, res: Response): Promise<Response> {
     const { name, sector }: SupervisorProps = req.body;
+    const prisma = new PrismaClient()
+    const findSupervisorWithName = await prisma.supervisors.findUnique({
+      where: { name }
+    })
+
+    if(findSupervisorWithName) return res.status(StatusCode.INVALID_DATA).json({message: "Supervisor já cadastrado"})
 
     const insertionService = await this.service.create({ name, sector })
 

@@ -6,14 +6,14 @@ import { NoData } from "../components/DefaultComponent";
 import { inputGroup } from "../components/Modal";
 import { ModalInsertEntrance } from "../components/modals-manager/InsertEntrance";
 import { DatabaseContext } from "../context/Context-provider";
-import { EntranceProps, SupervisorProps, ToolProps } from "../context/types";
+import { EntranceProps } from "../context/types";
 import { capitalizeFirstLetter } from "../utils/capitalizerString";
 
 export function HomeAppEntrances() {
   const contextState = useContext(DatabaseContext)
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
-  const [entrance, setEntrance] = useState<EntranceProps>({} as EntranceProps)
+  const [_entrance, setEntrance] = useState<EntranceProps>({} as EntranceProps)
   const [searchEntrance, setSearchEntrance] = useState<string>("")
 
   const filteredByNameEntrance: EntranceProps[] = contextState.entrances.filter((entrance) => entrance.toolName.includes(capitalizeFirstLetter(searchEntrance)))

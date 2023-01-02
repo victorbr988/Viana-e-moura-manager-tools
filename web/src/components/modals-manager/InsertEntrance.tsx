@@ -1,12 +1,10 @@
 import clsx from "clsx";
 import { useContext, useEffect, useState } from "react";
-import { FiDivide, FiDollarSign, FiSave, FiUser } from "react-icons/fi";
+import { FiDivide, FiDollarSign, FiSave } from "react-icons/fi";
 import Select from "react-select";
 import { AuthContext, DatabaseContext } from "../../context/Context-provider";
 import { ContextDatabaseProps } from "../../context/Database-provider";
-import { ContextProps, ToolProps } from "../../context/types";
-import { dateFormat } from "../../utils/dateFormat";
-import { toBRLCurrency } from "../../utils/priceFormat";
+import { ContextProps, ToolProps, EntranceProps } from "../../context/types";
 import { ButtonAdd } from "../Button";
 import { Modal } from "../Modal";
 
@@ -28,14 +26,14 @@ export function ModalInsertEntrance({ isOpen, setIsOpen }: ModalProps) {
   const optionsTools: any[] = [{ value: "Ferramenta", label: "Ferramenta"}] 
   const optionsSupervisors: any[] = [{ value: "Supervisor", label: "Supervisor"}] 
 
-  contextState.tools.map((tool: ToolProps) => {
+  contextState.tools.forEach((tool: ToolProps) => {
     optionsTools.push({
       value: tool.name,
       label: tool.name
     })
   })
 
-  contextState.supervisors.map((tool: ToolProps) => {
+  contextState.supervisors.forEach((tool: ToolProps) => {
     optionsSupervisors.push({
       value: tool.name,
       label: tool.name
@@ -70,7 +68,7 @@ export function ModalInsertEntrance({ isOpen, setIsOpen }: ModalProps) {
       addedAt: new Date(date),
       unitPrice: price,
       quantity,
-      userId: authContext.userLogged!.uid
+      userId: authContext.userLogged!.uid,
     }
     contextState.createEntrance(body)
     setIsOpen(!isOpen)

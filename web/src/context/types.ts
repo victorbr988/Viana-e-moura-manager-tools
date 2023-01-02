@@ -32,10 +32,6 @@ export interface EntranceProps {
   quantity: number,
   unitPrice: number,
   userId: string,
-  supervisors: {
-    name: string,
-    sector: string
-  }
 }
 
 export interface EnterpriseProps extends ToolProps {}

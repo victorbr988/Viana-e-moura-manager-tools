@@ -11,12 +11,12 @@ import { SelectOptions } from "../../utils/selectOptions";
 import { ButtonAdd } from "../Button";
 import { Modal } from "../Modal";
 
-interface ModalToolsProps {
+interface ModalProps {
   isOpen: boolean;
   setIsOpen(value: boolean): void
 }
 
-export function ModalInsertSupervisor({ isOpen, setIsOpen }: ModalToolsProps) {
+export function ModalInsertSupervisor({ isOpen, setIsOpen }: ModalProps) {
   const contextState: ContextDatabaseProps = useContext(DatabaseContext)
   const [nameSupervisor, setNameSupervisor] = useState<string>("")
   const [sectorSupervisor, setSectorSupervisor] = useState<string>("")

@@ -7,13 +7,13 @@ import { capitalizeFirstLetter } from "../../utils/capitalizerString";
 import { ButtonAdd } from "../Button";
 import { Modal } from "../Modal";
 
-interface ModalToolsProps {
+interface ModalProps {
   isOpen: boolean;
   setIsOpen(value: boolean): void;
   enterpriseId: number
 }
 
-export function ModalUpdateEnterprise({ isOpen, setIsOpen, enterpriseId }: ModalToolsProps) {
+export function ModalUpdateEnterprise({ isOpen, setIsOpen, enterpriseId }: ModalProps) {
   const contextState: ContextDatabaseProps = useContext(DatabaseContext)
   const [enterprise, setEnterprise] = useState<string>("")
 

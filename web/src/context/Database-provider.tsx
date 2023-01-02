@@ -1,11 +1,10 @@
 import { AxiosError } from "axios";
 import { ReactNode, useEffect, useState } from "react"
 import { toast } from "react-hot-toast";
-import { useLocation } from "react-router-dom";
 import { create, deleteData, getData, update } from "../axios/requesters";
 import { orderArray } from "../utils/orderArrayList";
 import { DatabaseContext } from "./Context-provider"
-import { EnterpriseProps, SupervisorProps, ToolProps } from "./types";
+import { EnterpriseProps, EntranceProps, SupervisorProps, ToolProps } from "./types";
 
 interface DatabaseProviderProps {
   children: ReactNode
@@ -15,23 +14,30 @@ export interface ContextDatabaseProps {
   tools: ToolProps[];
   createTool(value: string): void;
   deleteTool(id: number): void;
-  updateTool(data: Record<string, string | number>): void;
-  getTools(): void
-  enterprises: EnterpriseProps[]
+  updateTool(data: ToolProps): void;
+  getTools(): void;
+  enterprises: EnterpriseProps[];
   createEnterprise(value: string): void;
   deleteEnterprise(id: number): void;
-  updateEnterprise(data: Record<string, string | number>): void;
-  supervisors: SupervisorProps[]
-  createSupervisor(data: Record<string, string | number>): void;
+  updateEnterprise(data: EnterpriseProps): void;
+  supervisors: SupervisorProps[];
+  createSupervisor(data: SupervisorProps): void;
   deleteSupervisor(id: number): void;
-  updateSupervisor(data: Record<string, string | number>): void;
-  getSupervisors(): void
+  updateSupervisor(data: SupervisorProps): void;
+  getSupervisors(): void;
+  entrances: EntranceProps[];
+  createEntrance(data: EntranceProps): void;
+  deleteEntrance(id: number): void;
+  updateEntrance(data: EntranceProps): void;
+  getEntrances(): void;
 }
 
 export function DatabaseProvider({ children }: DatabaseProviderProps) {
   const [tools, setTools] = useState<ToolProps[]>([])
   const [enterprises, setEnterprises] = useState<EnterpriseProps[]>([])
   const [supervisors, setSupervisors] = useState<SupervisorProps[]>([])
+  const [entrances, setEntrances] = useState<EntranceProps[]>([])
+  
 
   const contextType: ContextDatabaseProps = {
     tools,
@@ -47,22 +53,13 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     deleteSupervisor,
     supervisors,
     updateSupervisor,
-    getSupervisors
+    getSupervisors,
+    getEntrances,
+    createEntrance,
+    deleteEntrance,
+    entrances,
+    updateEntrance,
   }
-
-  const location = useLocation()
-
-  useEffect(() => {
-    if (location.pathname === '/home-app/tools') {
-      getTools()
-    }
-  }, [])
-
-  useEffect(() => {
-    if (location.pathname === '/home-app/enterprises') {
-      getEnterprises()
-    }
-  }, [])
 
   async function getTools() {
     try {
@@ -78,7 +75,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   async function createTool(name: string) {
     const toastId = toast.loading("Criando ferramenta...")
     try {
-      await create('/tools', { name })
+      await create<ToolProps>('/tools', { name })
       await getTools()
 
       toast.dismiss(toastId)
@@ -104,10 +101,10 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     }
   }
 
-  async function updateTool(data: Record<string, string | number>) {
+  async function updateTool(data: ToolProps) {
     const toastId = toast.loading("Editando ferramenta...")
     try {
-      await update(`/tools/${data.id}`, data)
+      await update<ToolProps>(`/tools/${data.id}`, data)
       await getTools()
 
       toast.dismiss(toastId)
@@ -133,7 +130,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   async function createEnterprise(name: string) {
     const toastId = toast.loading("Criando empreendimento...")
     try {
-      await create('/enterprises', { name })
+      await create<EnterpriseProps>('/enterprises', { name })
       await getEnterprises()
 
       toast.dismiss(toastId)
@@ -159,10 +156,10 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     }
   }
 
-  async function updateEnterprise(data: Record<string, string | number>) {
+  async function updateEnterprise(data: EnterpriseProps) {
     const toastId = toast.loading("Editando empreendimento...")
     try {
-      await update(`/enterprises/${data.id}`, data)
+      await update<EnterpriseProps>(`/enterprises/${data.id}`, data)
       await getEnterprises()
 
       toast.dismiss(toastId)
@@ -187,10 +184,10 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     }
   }
 
-  async function createSupervisor(data: Record<string, string>) {
+  async function createSupervisor(data: SupervisorProps) {
     const toastId = toast.loading("Criando supervisor...")
     try {
-      await create('/supervisors', data)
+      await create<SupervisorProps>('/supervisors', data)
       await getSupervisors()
 
       toast.dismiss(toastId)
@@ -216,13 +213,71 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     }
   }
 
-  async function updateSupervisor(data: Record<string, string | number>) {
+  async function updateSupervisor(data: SupervisorProps) {
     const toastId = toast.loading("Editando supervisor...", {
       duration: 2000
     })
     try {
-      await update(`/supervisors/${data.id}`, data)
+      await update<SupervisorProps>(`/supervisors/${data.id}`, data)
       await getSupervisors()
+
+      toast.dismiss(toastId)
+      toast.success("Editado com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+      throw err
+    }
+  }
+
+  // CRUD Entrance
+  async function getEntrances() {
+    try {
+      const entrances = await getData('/entrance')
+      setEntrances(orderArray<EntranceProps>(entrances.data))
+      return supervisors
+    } catch(err: AxiosError | any) {
+      toast.error(err)
+      console.log(err)
+    }
+  }
+
+  async function createEntrance(data: EntranceProps) {
+    const toastId = toast.loading("Criando Entrada...")
+    try {
+      await create<EntranceProps>('/entrance', data)
+      await getEntrances()
+
+      toast.dismiss(toastId)
+      toast.success("Entrada criada com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+    }
+  }
+
+  async function deleteEntrance(id: number) {
+    const toastId = toast.loading("Verificando Entrada...")
+    try {
+      await deleteData(`/entrance/${id}`)
+      await getEntrances()
+
+      toast.dismiss(toastId)
+      toast.success("Excluído com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+      throw err
+    }
+  }
+
+  async function updateEntrance(data: EntranceProps) {
+    const toastId = toast.loading("Editando entrada...", {
+      duration: 2000
+    })
+    try {
+      await update<EntranceProps>(`/entrance/${data.id}`, data)
+      await getEntrances()
 
       toast.dismiss(toastId)
       toast.success("Editado com sucesso")

@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from "axios"
 import { instance } from "./axios-config"
 
-export async function create(url: string, data: Record<string, string>): Promise<AxiosResponse<AxiosError | any>> {
+export async function create<T>(url: string, data: T): Promise<AxiosResponse<AxiosError | T>> {
   try {
     const createResponse = await instance.post(
       url,
@@ -28,7 +28,7 @@ export async function getData(url: string): Promise<AxiosResponse> {
   }
 }
 
-export async function deleteData(url: string) {
+export async function deleteData(url: string): Promise<void> {
   try {
     await instance.delete(url)
   } catch(err: AxiosError | any) {
@@ -40,7 +40,7 @@ export async function deleteData(url: string) {
   }
 }
 
-export async function update(url: string, data: Record<string, string | number>) {
+export async function update<T>(url: string, data: T): Promise<void>  {
   try {
     await instance.put(url, { ...data })
   } catch(err: AxiosError | any) {

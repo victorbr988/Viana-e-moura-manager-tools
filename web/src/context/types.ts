@@ -24,4 +24,18 @@ export interface SupervisorProps {
   sector: string
 };
 
+export interface EntranceProps {
+  id?: number,
+  toolName: string,
+  addedAt: Date,
+  supervisorName: string,
+  quantity: number,
+  unitPrice: number,
+  userId: string,
+  supervisors: {
+    name: string,
+    sector: string
+  }
+}
+
 export interface EnterpriseProps extends ToolProps {}

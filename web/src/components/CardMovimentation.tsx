@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ReactNode } from "react"
 import { NavLink, useLocation } from "react-router-dom"
+import { dateFormat } from "../utils/dateFormat";
 
 export interface EntranceProps {
   id?: number;
@@ -35,7 +36,7 @@ export function CardMovimentation({ variant, data, children }: CardMovimentation
 
   return (
     <div 
-      className=' border-teal-500 shadow-md border-l-8 rounded flex flex-col justify-between'>
+      className=' border-blue-600 shadow-md bg-white border-l-8 rounded flex flex-col justify-between'>
       {
         variant === "exit" && (
           <div
@@ -56,14 +57,14 @@ export function CardMovimentation({ variant, data, children }: CardMovimentation
         {
           variant === "entrance" && 
           (
-            <p className="text-sm text-slate-500">{new Date(Date.now()).toLocaleDateString()}</p>
+            <p className="text-sm text-slate-500">{dateFormat(new Date(data.addedAt))}</p>
           )
         }
 
         <div className="flex justify-between items-center mt-4">
           <NavLink 
               to={`${location.pathname}/${data.id}`}
-              className="hover:text-gray-600 underline-offset-4 text-sm text-gray-900 underline"
+              className="hover:text-blue-500 underline-offset-4 text-sm text-gray-900 underline"
             >
               Detalhes
             </NavLink> 

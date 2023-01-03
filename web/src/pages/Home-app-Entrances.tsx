@@ -5,18 +5,22 @@ import { CardMovimentation } from "../components/CardMovimentation";
 import { NoData } from "../components/DefaultComponent";
 import { inputGroup } from "../components/Modal";
 import { ModalInsertEntrance } from "../components/modals-manager/InsertEntrance";
-import { DatabaseContext } from "../context/Context-provider";
+import { ModalUpdateEntrance } from "../components/modals-manager/UpdateEntrance";
+import { AuthContext, DatabaseContext } from "../context/Context-provider";
 import { EntranceProps } from "../context/types";
 import { capitalizeFirstLetter } from "../utils/capitalizerString";
 
 export function HomeAppEntrances() {
   const contextState = useContext(DatabaseContext)
+  const authContext = useContext(AuthContext)
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const [isOpenEditModal, setIsOpenEditModal] = useState<boolean>(false)
-  const [_entrance, setEntrance] = useState<EntranceProps>({} as EntranceProps)
+  const [entrance, setEntrance] = useState<EntranceProps>({} as EntranceProps)
   const [searchEntrance, setSearchEntrance] = useState<string>("")
+  const userCredencial = authContext.userLogged
 
-  const filteredByNameEntrance: EntranceProps[] = contextState.entrances.filter((entrance) => entrance.toolName.includes(capitalizeFirstLetter(searchEntrance)))
+  const entranceByUserId = contextState.entrances.filter((entranceObj: EntranceProps) => entranceObj.userId === userCredencial?.uid)
+  const filteredByNameEntrance: EntranceProps[] = entranceByUserId.filter((entrance) => entrance.toolName.includes(capitalizeFirstLetter(searchEntrance)))
 
   function handleClickEdit(entrances: EntranceProps) {
     setIsOpenEditModal(!isOpenEditModal)
@@ -32,9 +36,9 @@ export function HomeAppEntrances() {
   }, [])
 
   function renderCards() {
-    const iterableData: EntranceProps[] = filteredByNameEntrance.length <= 0 ? contextState.entrances : filteredByNameEntrance
+    const iterableData: EntranceProps[] = filteredByNameEntrance.length <= 0 ? entranceByUserId : filteredByNameEntrance
 
-    if (contextState.entrances.length <= 0) return <NoData />
+    if (entranceByUserId.length <= 0) return <NoData />
     
     return iterableData.map(entrance => (
       <CardMovimentation 
@@ -66,7 +70,7 @@ export function HomeAppEntrances() {
         <section className="flex flex-col w-full gap-2 items-end bg-transparent">
           <inputGroup.Label>
             <FiSearch />
-            <inputGroup.Input onChange={handleSearch} placeholder="Buscar por um supervisor" />
+            <inputGroup.Input onChange={handleSearch} placeholder="Buscar uma entrada de ferramenta" />
           </inputGroup.Label>
           <section>
             <ButtonAdd
@@ -91,11 +95,11 @@ export function HomeAppEntrances() {
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
       />
-      {/* <ModalUpdateSupervisor
-        supervisorId={supervisor.id as number}
+      <ModalUpdateEntrance
+        entranceId={entrance.id as number}
         isOpen={isOpenEditModal}
         setIsOpen={setIsOpenEditModal}
-      /> */}
+      />
     </section>
   )
 }

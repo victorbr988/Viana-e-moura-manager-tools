@@ -8,7 +8,6 @@ import { HomeAppTools } from "../pages/Home-app-tools";
 import { HomeLogin } from "../pages/Home-login";
 
 export function Pagination() {
-
   return (
     <Routes>
       <Route path="/" element={ <HomeLogin />} />

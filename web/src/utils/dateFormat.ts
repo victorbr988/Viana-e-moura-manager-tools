@@ -1,6 +1,6 @@
 const options = {
   year: 'numeric', month: 'numeric', day: 'numeric',
-  hour: 'numeric', minute: 'numeric', second: 'numeric',
+  hour: 'numeric', minute: 'numeric',
   hour12: false,
   timeZone: "America/Sao_paulo"
 };

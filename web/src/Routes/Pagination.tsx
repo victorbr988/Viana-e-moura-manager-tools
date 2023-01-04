@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ModalDetailsEntrance } from "../components/modals-manager/ModalDetailsEntrance";
 import { HomeApp } from "../pages/Home-app";
 import { HomeAppEnterprises } from "../pages/Home-app-Enterprises";
 import { HomeAppEntrances } from "../pages/Home-app-Entrances";
@@ -16,6 +17,7 @@ export function Pagination() {
       <Route path="/home-app/enterprises" element={ <HomeAppEnterprises /> } />
       <Route path="/home-app/supervisors" element={ <HomeAppSupervisors /> } />
       <Route path="/home-app/entrance" element={ <HomeAppEntrances /> } />
+      <Route path="/home-app/entrance/:id" element={ <ModalDetailsEntrance /> } />
       <Route path="/home-app/exit" element={ <HomeAppExit /> } />
     </Routes>
   )

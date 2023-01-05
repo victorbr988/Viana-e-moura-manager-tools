@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { FiEdit, FiPlus, FiSearch, FiTrash2 } from "react-icons/fi";
 import { ButtonAdd } from "../components/Button";
 import { CardProduct } from "../components/CardProduct";
@@ -19,6 +19,10 @@ export function HomeAppEnterprises() {
 
   const filteredByNameEnterprise: EnterpriseProps[] = contextState.enterprises.filter((enterprise) => enterprise.name.includes(capitalizeFirstLetter(searchEnterprise)))
 
+  useEffect(() => {
+    contextState.getEnterprises()
+  })
+
   function handleClickEdit(enterprise: ToolProps) {
     setIsOpenEditModal(!isOpenEditModal)
     setEnterprise(enterprise)
@@ -29,7 +33,7 @@ export function HomeAppEnterprises() {
   }
 
   function renderCards() {
-    const iterableData: ToolProps[] = filteredByNameEnterprise.length <= 0 ? contextState.enterprises : filteredByNameEnterprise
+    const iterableData: EnterpriseProps[] = filteredByNameEnterprise.length <= 0 ? contextState.enterprises : filteredByNameEnterprise
 
     if (contextState.enterprises.length <= 0) return <NoData />
     return iterableData.map(enterprise => (

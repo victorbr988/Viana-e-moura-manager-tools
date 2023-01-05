@@ -5,6 +5,7 @@ import { CardMovimentation } from "../components/CardMovimentation";
 import { NoData } from "../components/DefaultComponent";
 import { inputGroup } from "../components/Modal";
 import { ModalInsertExit } from "../components/modals-manager/InsertExit";
+import { ModalUpdateExit } from "../components/modals-manager/UpdateExit";
 import { AuthContext, DatabaseContext } from "../context/Context-provider";
 import { ExitProps } from "../context/types";
 import { capitalizeFirstLetter } from "../utils/capitalizerString";
@@ -21,9 +22,9 @@ export function HomeAppExit() {
   const exitByUserId = contextState.exits.filter((exitObj: ExitProps) => exitObj.userId === userCredencial?.uid)
   const filteredByNameExit: ExitProps[] = exitByUserId.filter((exit) => exit.toolName.includes(capitalizeFirstLetter(searchExit)))
 
-  function handleClickEdit(entrances: ExitProps) {
+  function handleClickEdit(exits: ExitProps) {
     setIsOpenEditModal(!isOpenEditModal)
-    setExit(entrances)
+    setExit(exits)
   }
 
   function handleSearch({ target }: any) {
@@ -94,11 +95,11 @@ export function HomeAppExit() {
         isOpen={isOpenModal}
         setIsOpen={setIsOpenModal}
       />
-      {/* <ModalUpdateEntrance
-        entranceId={entrance.id as number}
+      <ModalUpdateExit
+        exitId={exit.id as number}
         isOpen={isOpenEditModal}
         setIsOpen={setIsOpenEditModal}
-      /> */}
+      />
     </section>
   )
 }

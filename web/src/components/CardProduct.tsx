@@ -20,7 +20,7 @@ export function CardProduct({ children, data }: CardProductProps ) {
         {data.sector && <p className="text-gray-500 text-sm font-light rounded-lg">Setor: {data.sector}</p>}
         <h2>{data.name}</h2>
       </div>  
-      <div className="flex justify-end items-center gap-3">
+      <div className="flex justify-end items-center gap-3 text-lg">
         { children }
       </div>
     </div>

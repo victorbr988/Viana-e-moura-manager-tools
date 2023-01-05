@@ -61,7 +61,7 @@ export function ModalInsertSupervisor({ isOpen, setIsOpen }: ModalProps) {
             <FiSave />
             Salvar 
           </ButtonAdd>
-          <button type="button" onClick={() => setIsOpen(false)}>Cancelar</button>
+          <button className="bg-gray-300 p-2 rounded" type="button" onClick={() => setIsOpen(false)}>Cancelar</button>
         </Modal.Content>
       </Modal.Root>
     </div>

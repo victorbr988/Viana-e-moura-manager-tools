@@ -15,7 +15,7 @@ type ModalLabelProps = ModalContentProps
 
 function ModalRoot({title, children}: ModalRootProps) {
   return (
-    <form className="bg-white shadow-lg rounded-lg sm:w-[400px] w-full justify-center flex flex-col sm:px-11 px-5 gap-5 pb-8">
+    <form className="bg-white shadow-lg rounded-lg sm:w-[400px] sm:max-h-[500px] w-full justify-center flex flex-col px-5 gap-2 pb-8">
       <h2 className="text-gray-900 text-center text-xl font-semibold py-5">{title}</h2>
       {children}
     </form>
@@ -24,9 +24,9 @@ function ModalRoot({title, children}: ModalRootProps) {
 
 function ModalContent({children}: ModalContentProps) {
   return(
-    <Fragment>
+    <div className="overflow-y-auto w-full h-full flex flex-col gap-4">
       {children}
-    </Fragment>
+    </div>
   )
 }
 

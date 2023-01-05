@@ -29,10 +29,10 @@ model Enterprises {
 
 model Entrance {
   id              Int           @id @default(autoincrement())
-  name            Tools        @relation(fields: [toolName], references: [name], onDelete: Cascade)
+  name            Tools         @relation(fields: [toolName], references: [name])
   toolName        String
   addedAt         DateTime
-  supervisors     Supervisors?  @relation(fields: [supervisorName], references: [name], onDelete: Cascade)
+  supervisors     Supervisors?  @relation(fields: [supervisorName], references: [name])
   supervisorName  String
   quantity        Int
   unitPrice       Float
@@ -43,11 +43,11 @@ model Exit {
   id              Int           @id @default(autoincrement())
   status          String
   requester       String
-  name            Tools?        @relation(fields: [toolName], references: [name], onDelete: Cascade)
+  name            Tools?        @relation(fields: [toolName], references: [name])
   toolName        String
   requestedAt     DateTime
   responseAt      DateTime
-  enterprise      Enterprises?  @relation(fields: [enterpriseName], references: [name], onDelete: Cascade)
+  enterprise      Enterprises?  @relation(fields: [enterpriseName], references: [name])
   enterpriseName  String
   quantity        Int
   account         String

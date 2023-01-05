@@ -45,7 +45,7 @@ model Exit {
   requester       String
   name            Tools?        @relation(fields: [toolName], references: [name], onDelete: Cascade)
   toolName        String
-  requestedAt       DateTime
+  requestedAt     DateTime
   responseAt      DateTime
   enterprise      Enterprises?  @relation(fields: [enterpriseName], references: [name], onDelete: Cascade)
   enterpriseName  String

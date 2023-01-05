@@ -51,8 +51,8 @@ export function HomeAppExit() {
             onClick={() => handleClickEdit(exit)}
           />
           <FiTrash2
-            className="text-red-500 cursor-pointer"
-            onClick={() => contextState.deleteEntrance(exit.id as number)}
+            className="text-red-500 cursor-pointer" 
+            onClick={() => contextState.deleteExit(exit.id as number)}
           />
         </Fragment>
       </CardMovimentation>

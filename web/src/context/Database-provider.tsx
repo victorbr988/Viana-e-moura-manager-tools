@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { ReactNode, useEffect, useMemo, useState } from "react"
+import { ReactNode, useState } from "react"
 import { toast } from "react-hot-toast";
 import { create, deleteData, getData, update } from "../axios/requesters";
 import { orderArray } from "../utils/orderArrayList";
@@ -188,7 +188,6 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   async function getSupervisors() {
     try {
       const supervisors = await getData('/supervisors')
-      console.log(supervisors)
       setSupervisors(orderArray<SupervisorProps>(supervisors.data))
       return supervisors
     } catch(err: AxiosError | any) {

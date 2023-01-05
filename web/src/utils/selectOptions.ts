@@ -4,3 +4,8 @@ export const SelectOptions = [
   {value: "Produção", label: "Produção"},
   {value: "Suprimentos", label: "Suprimentos"},
 ]
+
+export const SelectOptionsStatus = [
+  {value: "Atendido", label: "Atendido"},
+  {value: "Pendente", label: "Pendente"},
+]

@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { create, deleteData, getData, update } from "../axios/requesters";
 import { orderArray } from "../utils/orderArrayList";
 import { DatabaseContext } from "./Context-provider"
-import { EnterpriseProps, EntranceProps, SupervisorProps, ToolProps } from "./types";
+import { EnterpriseProps, EntranceProps, ExitProps, SupervisorProps, ToolProps } from "./types";
 
 interface DatabaseProviderProps {
   children: ReactNode
@@ -17,6 +17,7 @@ export interface ContextDatabaseProps {
   updateTool(data: ToolProps): void;
   getTools(): void;
   enterprises: EnterpriseProps[];
+  getEnterprises(): void
   createEnterprise(value: string): void;
   deleteEnterprise(id: number): void;
   updateEnterprise(data: EnterpriseProps): void;
@@ -30,6 +31,11 @@ export interface ContextDatabaseProps {
   deleteEntrance(id: number): void;
   updateEntrance(data: EntranceProps): void;
   getEntrances(): void;
+  exits: ExitProps[];
+  createExit(data: ExitProps): void;
+  deleteExit(id: number): void;
+  updateExit(data: ExitProps): void;
+  getExits(): void;
 }
 
 export function DatabaseProvider({ children }: DatabaseProviderProps) {
@@ -37,6 +43,7 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   const [enterprises, setEnterprises] = useState<EnterpriseProps[]>([])
   const [supervisors, setSupervisors] = useState<SupervisorProps[]>([])
   const [entrances, setEntrances] = useState<EntranceProps[]>([])
+  const [exits, setExit] = useState<ExitProps[]>([])
   
 
   const contextType: ContextDatabaseProps = {
@@ -59,6 +66,12 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
     deleteEntrance,
     entrances,
     updateEntrance,
+    createExit,
+    deleteExit,
+    exits,
+    getExits,
+    updateExit,
+    getEnterprises
   }
 
   async function getTools() {
@@ -272,12 +285,66 @@ export function DatabaseProvider({ children }: DatabaseProviderProps) {
   }
 
   async function updateEntrance(data: EntranceProps) {
-    const toastId = toast.loading("Editando entrada...", {
-      duration: 2000
-    })
+    const toastId = toast.loading("Editando entrada...")
     try {
       await update<EntranceProps>(`/entrance/${data.id}`, data)
       await getEntrances()
+
+      toast.dismiss(toastId)
+      toast.success("Editado com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+      throw err
+    }
+  }
+
+  // CRUD exit
+  async function getExits() {
+    try {
+      const exits = await getData('/exit')
+      setExit(orderArray(exits.data))
+      return supervisors
+    } catch(err: AxiosError | any) {
+      toast.error(err)
+      console.log(err)
+    }
+  }
+
+  async function createExit(data: ExitProps) {
+    const toastId = toast.loading("Criando saída...")
+    try {
+      await create<ExitProps>('/exit', data)
+      await getExits()
+
+      toast.dismiss(toastId)
+      toast.success("Saída criada com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+    }
+  }
+
+  async function deleteExit(id: number) {
+    const toastId = toast.loading("Verificando saída...")
+    try {
+      await deleteData(`/exit/${id}`)
+      await getExits()
+
+      toast.dismiss(toastId)
+      toast.success("Excluído com sucesso")
+    } catch(err: AxiosError | any) {
+      toast.dismiss(toastId)
+      toast.error(err)
+      throw err
+    }
+  }
+
+  async function updateExit(data: ExitProps) {
+    const toastId = toast.loading("Editando saída...")
+    try {
+      await update<ExitProps>(`/exit/${data.id}`, data)
+      await getExits()
 
       toast.dismiss(toastId)
       toast.success("Editado com sucesso")

@@ -23,7 +23,7 @@ export function CardMovimentation({ variant, data, children }: CardMovimentation
           >
            <span className={clsx('px-[8px] font-light text-sm text-white rounded-l-full', {
                 "bg-red-600": data.status === 'Pendente',
-                "bg-green-600": data.status === 'Autorizado',
+                "bg-green-600": data.status === 'Atendido',
               })}
             >
               { data.status }

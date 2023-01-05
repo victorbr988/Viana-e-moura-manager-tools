@@ -142,7 +142,6 @@ export function ModalInsertExit({ isOpen, setIsOpen }: ModalProps) {
       "hidden": isOpen === false
     })}>
       <Modal.Root title="Adicionar uma Saída">
-        {newContent ? (
           <Modal.Content>
             <Modal.Label>
               <span>Solicitado em:</span>
@@ -156,23 +155,6 @@ export function ModalInsertExit({ isOpen, setIsOpen }: ModalProps) {
             <Select id="supervisor" defaultValue={optionsSupervisors[0]} options={optionsSupervisors} onChange={updateSupervisor} />
             <Select id="status" defaultValue={SelectOptionsStatus[0]} options={SelectOptionsStatus} onChange={updateStatus} />
             <Select id="enterprise" defaultValue={optionsEnterprises[0]} options={optionsEnterprises} onChange={updateEnterprise} />
-            <button
-              className="flex justify-center items-center gap-2"
-              onClick={() => setNewContent(!newContent) }
-            >
-              <FiArrowLeftCircle />  
-              <span>Voltar</span> 
-            </button>
-            <ButtonAdd
-              handleClick={handleClick}
-            >
-              <FiSave />
-              Salvar
-            </ButtonAdd>
-            <button className="bg-gray-300 p-2 rounded" type="button" onClick={() => setIsOpen(false)}>Cancelar</button>
-          </Modal.Content>
-        ): (
-          <Modal.Content>
             <Modal.Label>
               <FiUserMinus />
               <Modal.Input type="text" placeholder="Solicitante" onChange={updateRequester} />
@@ -193,16 +175,14 @@ export function ModalInsertExit({ isOpen, setIsOpen }: ModalProps) {
               <FiDollarSign />
               <Modal.Input type="number" onChange={updatePrice} placeholder="Valor unitário" />
             </Modal.Label>
-            <button
-              className="flex justify-center items-center gap-2"
-              onClick={() => setNewContent(!newContent) }
-            >
-              <FiArrowRightCircle />
-              <span>Próxima</span>  
-            </button>
-            <button className="bg-gray-300 p-2 rounded" type="button" onClick={() => setIsOpen(false)}>Cancelar</button>
           </Modal.Content>
-        )}
+          <ButtonAdd
+            handleClick={handleClick}
+          >
+            <FiSave />
+            Salvar
+          </ButtonAdd>
+          <button className="bg-gray-300 p-2 rounded" type="button" onClick={() => setIsOpen(false)}>Cancelar</button>
       </Modal.Root>
     </div>
   )

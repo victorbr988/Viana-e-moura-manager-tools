@@ -34,4 +34,18 @@ export interface EntranceProps {
   userId: string,
 }
 
+export interface ExitProps {
+  id?: number,
+  status: string,
+  requester: string,
+  toolName: string,
+  requestedAt: Date,
+  responseAt: Date,
+  enterpriseName: string
+  quantity: number,
+  account: string,
+  subAccount: string,
+  userId: string
+}
+
 export interface EnterpriseProps extends ToolProps {}

@@ -1,5 +1,6 @@
 import locations from "../assets/locations.svg"
 import noData from "../assets/no-data.svg"
+import workInProgress from "../assets/work-in-progress.svg"
 import { ButtonSecondary } from "./Button"
 
 export function Unautorized() {
@@ -19,6 +20,15 @@ export function NoData() {
     <div className="h-screen flex flex-col justify-center items-center gap-4">
       <img src={noData} className="md:w-60 md:h-60 w-40 h-40" alt="não autorizado" />
       <h2 className="text-xl">Nada por aqui!</h2>
+    </div>  
+  )
+}
+
+export function WorkInProgress() {
+  return (
+    <div className="h-screen flex flex-col justify-center w-full items-center gap-4">
+      <img src={workInProgress} className="md:w-60 md:h-60 w-40 h-40" alt="não autorizado" />
+      <h2 className="text-xl">Trabalhando nisso!</h2>
     </div>  
   )
 }

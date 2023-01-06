@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { WorkInProgress } from "../components/DefaultComponent";
 import { ModalDetailsEntrance } from "../components/modals-manager/ModalDetailsEntrance";
 import { ModalDetailsExit } from "../components/modals-manager/ModalDetailsExit";
 import { HomeApp } from "../pages/Home-app";
@@ -21,6 +22,7 @@ export function Pagination() {
       <Route path="/home-app/entrance/:id" element={ <ModalDetailsEntrance /> } />
       <Route path="/home-app/exit" element={ <HomeAppExit /> } />
       <Route path="/home-app/exit/:id" element={ <ModalDetailsExit /> } />
+      <Route path="/home-app/dashboard" element={ <WorkInProgress /> } />
     </Routes>
   )
 }

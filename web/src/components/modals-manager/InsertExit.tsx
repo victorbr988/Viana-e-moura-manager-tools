@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useContext, useEffect, useState } from "react";
-import { FiArrowLeftCircle, FiArrowRightCircle, FiDivide, FiDollarSign, FiSave, FiUserMinus } from "react-icons/fi";
+import { FiDatabase, FiDivide, FiSave, FiUserMinus } from "react-icons/fi";
 import Select from "react-select";
 import { AuthContext, DatabaseContext } from "../../context/Context-provider";
 import { ContextDatabaseProps } from "../../context/Database-provider";
@@ -33,8 +33,6 @@ export function ModalInsertExit({ isOpen, setIsOpen }: ModalProps) {
   const [requestDate, setRequestDate] = useState<string>("")
   const [responseDate, setResponseDate] = useState<string>("")
   const [quantity, setQuantity] = useState<number>(0)
-  const [price, setPrice] = useState<number>(0)
-  const [newContent, setNewContent] = useState<boolean>(false)
 
   useEffect(() => {
     contextState.getTools()
@@ -106,10 +104,6 @@ export function ModalInsertExit({ isOpen, setIsOpen }: ModalProps) {
     setRequester(target.value)
   }
 
-  function updatePrice({ target }: any) {
-    setPrice(Number(target.value))
-  }
-
   function updateAccount({ target }: any) {
     setAccount(target.value)
   }
@@ -127,7 +121,6 @@ export function ModalInsertExit({ isOpen, setIsOpen }: ModalProps) {
       enterpriseName,
       responseAt: new Date(responseDate),
       requestedAt: new Date(requestDate),
-      unitPrice: price,
       quantity,
       account,
       subAccount,
@@ -160,20 +153,16 @@ export function ModalInsertExit({ isOpen, setIsOpen }: ModalProps) {
               <Modal.Input type="text" placeholder="Solicitante" onChange={updateRequester} />
             </Modal.Label>
             <Modal.Label>
-              <FiUserMinus />
+              <FiDatabase />
               <Modal.Input type="text" placeholder="Conta" onChange={updateAccount} />
             </Modal.Label>
             <Modal.Label>
-              <FiUserMinus />
+              <FiDatabase />
               <Modal.Input type="text" placeholder="Sub-conta" onChange={updateSubAccount} />
             </Modal.Label>
             <Modal.Label>
               <FiDivide />
               <Modal.Input type="number" onChange={updateQuantity} placeholder="Quantidade" />
-            </Modal.Label>
-            <Modal.Label>
-              <FiDollarSign />
-              <Modal.Input type="number" onChange={updatePrice} placeholder="Valor unitário" />
             </Modal.Label>
           </Modal.Content>
           <ButtonAdd

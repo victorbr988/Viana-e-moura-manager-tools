@@ -34,7 +34,6 @@ export function ModalUpdateExit({ isOpen, setIsOpen, exitId }: ModalProps) {
   const [requestDate, setRequestDate] = useState<string>("")
   const [responseDate, setResponseDate] = useState<string>("")
   const [quantity, setQuantity] = useState<number>(0)
-  const [price, setPrice] = useState<number>(0)
 
   useEffect(() => {
     contextState.getTools()
@@ -103,10 +102,6 @@ export function ModalUpdateExit({ isOpen, setIsOpen, exitId }: ModalProps) {
     setRequester(target.value)
   }
 
-  function updatePrice({ target }: any) {
-    setPrice(Number(target.value))
-  }
-
   function updateAccount({ target }: any) {
     setAccount(target.value)
   }
@@ -124,7 +119,6 @@ export function ModalUpdateExit({ isOpen, setIsOpen, exitId }: ModalProps) {
       enterpriseName,
       responseAt: new Date(responseDate),
       requestedAt: new Date(requestDate),
-      unitPrice: price,
       quantity,
       account,
       subAccount,
@@ -168,10 +162,6 @@ export function ModalUpdateExit({ isOpen, setIsOpen, exitId }: ModalProps) {
           <Modal.Label>
             <FiDivide />
             <Modal.Input type="number" onChange={updateQuantity} placeholder="Quantidade" />
-          </Modal.Label>
-          <Modal.Label>
-            <FiDollarSign />
-            <Modal.Input type="number" onChange={updatePrice} placeholder="Valor unitário" />
           </Modal.Label>
         </Modal.Content>
         <ButtonAdd

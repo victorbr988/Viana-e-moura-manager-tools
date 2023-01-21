@@ -15,7 +15,9 @@ export interface ContextProps {
 
 export interface ToolProps {
   id?: number,
-  name: string
+  name: string;
+  entrance?: EntranceProps[];
+  exit?: ExitProps[];
 };
 
 export interface SupervisorProps {

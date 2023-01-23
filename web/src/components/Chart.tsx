@@ -38,14 +38,14 @@ export function Chart() {
 
   const iterableDataEntrance = filteredDate.length === 0 ? contextState.entrances : filteredDate
   
-  iterableDataEntrance.map((entrance) => {
+  iterableDataEntrance.forEach((entrance) => {
     dataList.push(`${entrance.toolName} ${dateFormat(new Date(entrance.addedAt))}`)
     entrancesQuantity.push(entrance.quantity)
   })
 
   const filteredDateExits = contextState.exits.filter((exit) => {
     const ONE_HOUR = 1000 * 60 * 60
-    const initialDate = new Date(filteredByDate).getTime() + ONE_HOUR * 3 + ONE_HOUR * 24
+    const initialDate = new Date(filteredBySecondDate).getTime() + ONE_HOUR * 3 + ONE_HOUR * 24
     const exitDate = new Date(exit.responseAt).getTime() - ONE_HOUR * 3
 
     return exitDate <= initialDate
@@ -53,7 +53,7 @@ export function Chart() {
 
   const iterableDataExtit = filteredDateExits.length === 0 ? contextState.exits : filteredDateExits
   
-  iterableDataExtit.map((exit: ExitProps) => {
+  iterableDataExtit.forEach((exit: ExitProps) => {
     datalistExit.push(`${exit.toolName} ${dateFormat(new Date(exit.responseAt))}`)
     exitsQuantity.push(exit.quantity)
   })
@@ -74,16 +74,9 @@ export function Chart() {
     },
   ]
 
-  const seriesExit = [
-  {
-    name: 'Saídas',
-    data: exitsQuantity
-  }
-]
-
-  const optionsCurrency: ApexCharts.ApexOptions = {
+  const optionsExit: ApexCharts.ApexOptions = {
     xaxis: {
-      categories: dataList,
+      categories: datalistExit,
     },
     yaxis: {
       tooltip: {
@@ -91,11 +84,29 @@ export function Chart() {
       },
     },
   }
-  const seriesCurrency = [{
-      name: 'Valor unitário médio',
-      data: unitPriceByTool,
-    },
-  ]
+
+  const seriesExit = [
+  {
+    name: 'Saídas',
+    data: exitsQuantity
+  }
+]
+
+  // const optionsCurrency: ApexCharts.ApexOptions = {
+  //   xaxis: {
+  //     categories: dataList,
+  //   },
+  //   yaxis: {
+  //     tooltip: {
+  //       enabled: true,
+  //     },
+  //   },
+  // }
+  // const seriesCurrency = [{
+  //     name: 'Valor unitário médio',
+  //     data: unitPriceByTool,
+  //   },
+  // ]
 
   return (
     <div className="flex flex-col gap-5 p-20">
@@ -123,7 +134,7 @@ export function Chart() {
           </div>
           <h1 className="font-semibold text-xl">Saídas</h1>
           <ApexCharts 
-            options={options}
+            options={optionsExit}
             series={seriesExit}
             width={800}
             height={400}

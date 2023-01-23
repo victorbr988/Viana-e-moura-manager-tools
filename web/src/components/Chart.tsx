@@ -54,7 +54,7 @@ export function Chart() {
   const iterableDataExtit = filteredDateExits.length === 0 ? contextState.exits : filteredDateExits
   
   iterableDataExtit.forEach((exit: ExitProps) => {
-    datalistExit.push(`${exit.toolName} ${dateFormat(new Date(exit.responseAt))}`)
+    datalistExit.push(`${exit.toolName} ${dateFormat(new Date(exit.responseAt))}: ${exit.status}`)
     exitsQuantity.push(exit.quantity)
   })
 

@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import ApexCharts from "react-apexcharts";
-import { DatabaseContext } from "../context/Context-provider";
+import { AuthContext, DatabaseContext } from "../context/Context-provider";
 import { ExitProps } from "../context/types";
 import { dateFormat } from "../utils/dateFormat";
 
 export function Chart() {
   const contextState = useContext(DatabaseContext)
+  const authContextState = useContext(AuthContext);
   const [filteredByDate, setFilteredByDate] = useState<string>("")
   const [filteredBySecondDate, setFilteredBySecondDate] = useState<string>("")
 
@@ -26,7 +27,7 @@ export function Chart() {
   const datalistExit: string[] = []
   const entrancesQuantity: number[] = []
   const exitsQuantity: number[] = []
-  const unitPriceByTool: number[] = []
+  // const unitPriceByTool: number[] = []
   
   const filteredDate = contextState.entrances.filter((entrance) => {
     const ONE_HOUR = 1000 * 60 * 60
@@ -39,8 +40,10 @@ export function Chart() {
   const iterableDataEntrance = filteredDate.length === 0 ? contextState.entrances : filteredDate
   
   iterableDataEntrance.forEach((entrance) => {
-    dataList.push(`${entrance.toolName} ${dateFormat(new Date(entrance.addedAt))}`)
-    entrancesQuantity.push(entrance.quantity)
+    if (entrance.userId === authContextState.userLogged?.uid) {
+      dataList.push(`${entrance.toolName} ${dateFormat(new Date(entrance.addedAt))}`)
+      entrancesQuantity.push(entrance.quantity)
+    }
   })
 
   const filteredDateExits = contextState.exits.filter((exit) => {
@@ -54,8 +57,10 @@ export function Chart() {
   const iterableDataExtit = filteredDateExits.length === 0 ? contextState.exits : filteredDateExits
   
   iterableDataExtit.forEach((exit: ExitProps) => {
-    datalistExit.push(`${exit.toolName} ${dateFormat(new Date(exit.responseAt))}: ${exit.status}`)
-    exitsQuantity.push(exit.quantity)
+    if (exit.userId === authContextState.userLogged?.uid) {
+      datalistExit.push(`${exit.toolName} ${dateFormat(new Date(exit.responseAt))}: ${exit.status}`)
+      exitsQuantity.push(exit.quantity)
+    }
   })
 
   const options: ApexCharts.ApexOptions = {

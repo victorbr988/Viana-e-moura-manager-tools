@@ -47,6 +47,7 @@ Viana e Moura construções mas também utilizar relatórios como base para toma
     docker-compose down
   ```
 </details>
+⚠️ <strong>É necessário que todas as variáveis de ambientes estejam devidamente preenchidas.</strong>
 
 <details>
   <summary>⚙️ Detalhes dos serviços</summary>

@@ -20,10 +20,10 @@ export function Dashboard() {
   }, [])
 
   const entranceByMonth = contextState.entrances.filter((entrance) => {
-    const YEAR_NOW = new Date(Date.now()).getFullYear()
-    const MONTH_NOW = new Date(Date.now()).getMonth()
-    const dateEntranceYear = new Date(entrance.addedAt).getFullYear()
-    const dateEntranceMonth = new Date(entrance.addedAt).getMonth()
+    const YEAR_NOW: number = new Date(Date.now()).getFullYear()
+    const MONTH_NOW: number = new Date(Date.now()).getMonth()
+    const dateEntranceYear: number = new Date(entrance.addedAt).getFullYear()
+    const dateEntranceMonth: number = new Date(entrance.addedAt).getMonth()
     
     return dateEntranceMonth === MONTH_NOW && dateEntranceYear === YEAR_NOW
   })
@@ -43,10 +43,10 @@ export function Dashboard() {
   })
 
   const exitByMonth = exitWithUnitPrice.filter((exit) => {
-    const YEAR_NOW = new Date(Date.now()).getFullYear()
-    const MONTH_NOW = new Date(Date.now()).getMonth()
-    const dateEntranceYear = new Date(exit.responseAt).getFullYear()
-    const dateEntranceMonth = new Date(exit.responseAt).getMonth()
+    const YEAR_NOW: number = new Date(Date.now()).getFullYear()
+    const MONTH_NOW: number = new Date(Date.now()).getMonth()
+    const dateEntranceYear: number = new Date(exit.responseAt).getFullYear()
+    const dateEntranceMonth: number = new Date(exit.responseAt).getMonth()
     
     return dateEntranceMonth === MONTH_NOW && dateEntranceYear === YEAR_NOW
   })
@@ -55,7 +55,7 @@ export function Dashboard() {
   const entrancesCurrency: number = entranceByMonth.reduce((acc, curr) => acc + (curr.unitPrice * curr.quantity), 0)
   const exitsNumber: number = exitByMonth.reduce((acc, curr) => acc + curr.quantity, 0)
   const exitsCurrency: number = exitByMonth.reduce((acc, curr) => acc + (curr.unitPrice * curr.quantity), 0)
-  const inventoryQuantityNow = totalEntrancesNumber - totalExitsNumber
+  const inventoryQuantityNow: number = totalEntrancesNumber - totalExitsNumber
 
   useEffect(() => {
     setTotalEntrancesNumber(entrancesNumber)

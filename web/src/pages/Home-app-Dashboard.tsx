@@ -4,6 +4,7 @@ import { Chart } from "../components/Chart";
 import { DatabaseContext } from "../context/Context-provider";
 import { toBRLCurrency } from "../utils/priceFormat";
 import { uuidv4 } from "@firebase/util";
+import { EntranceProps, ExitProps, ToolProps } from "../context/types";
 
 export function Dashboard() {
   const contextState = useContext(DatabaseContext)
@@ -27,11 +28,17 @@ export function Dashboard() {
     return dateEntranceMonth === MONTH_NOW && dateEntranceYear === YEAR_NOW
   })
 
-  const exitWithUnitPrice: any[] = []
-  contextState.tools.forEach((data) => {
-    const recentlyentrance = data.entrance?.at(-1)
-    data.exit?.forEach((exit) => {
-      exitWithUnitPrice.push({...exit, unitPrice: recentlyentrance?.unitPrice})
+  interface ExitWithUnitPriceProps extends ExitProps {
+    unitPrice: number;
+  }
+
+  const exitWithUnitPrice: ExitWithUnitPriceProps[] = []
+
+  contextState.tools.forEach((data: ToolProps): void => {
+    const mostRecentlyEntrance: EntranceProps = data.entrance!.at(-1) as EntranceProps
+    
+    data.exit?.forEach((exit: ExitProps) => {
+      exitWithUnitPrice.push({...exit, unitPrice: mostRecentlyEntrance.unitPrice})
     })
   })
 

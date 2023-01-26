@@ -46,6 +46,7 @@ Viana e Moura construções mas também utilizar relatórios como base para toma
   ```sh
     docker-compose down
   ```
+  ⚠️ <strong>É necessário que todas as variáveis de ambientes estejam devidamente preenchidas.</strong>
 </details>
 
 <details>

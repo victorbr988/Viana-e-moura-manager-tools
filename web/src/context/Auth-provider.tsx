@@ -42,16 +42,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   async function managerErrorsAccess(userType: string | User, email: string, password: string) {
-    if (userType === customErrors.WRONG_PASSWORD) {
-      throw new Error("Senha não confere")
-    }
-
     if (typeof userType !== 'string') {
       return navigate("/home-app")
     }
 
-    if (userType === customErrors.INVALID_EMAIL) {
-      throw new Error("Email no formato inválido")
+    if (userType === customErrors.INVALID_EMAIL || userType === customErrors.WRONG_PASSWORD) {
+      throw new Error("Email ou Senha inválidos")
     }
 
     if (userType === customErrors.NOT_FOUND) {

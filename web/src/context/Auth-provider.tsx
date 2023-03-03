@@ -55,11 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     if (userType === customErrors.NOT_FOUND) {
-      try{
-        await createUser(email, password)
-      } catch(err: unknown) {
-        throw err
-      }
+      throw new Error("Usuário não encontrado")
     }
   }
 
